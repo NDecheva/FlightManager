@@ -1,6 +1,8 @@
 ﻿namespace FlightManagerMVC.Enums
 {
-    public class SeatClass
+    public enum SeatClass
     {
+        BusinessClass, 
+        EconomyClass
     }
 }

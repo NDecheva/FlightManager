@@ -1,6 +1,9 @@
 ﻿namespace FlightManagerMVC.Enums
 {
-    public class AircraftType
+    public enum AircraftType
     {
+        Jet, 
+        Turboprop, 
+        Helicopter
     }
 }

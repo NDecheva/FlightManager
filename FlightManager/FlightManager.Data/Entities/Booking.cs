@@ -8,6 +8,8 @@ namespace FlightManager.Data.Entities
 {
     public class Booking : BaseEntity
     {
+
+        public int FlightId { get; set; }
         public int PersonalId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -16,5 +18,6 @@ namespace FlightManager.Data.Entities
         public int Password { get; set; }
         public bool Nationality { get; set; }
         public bool SeatClass { get; set; }
+
     }
 }

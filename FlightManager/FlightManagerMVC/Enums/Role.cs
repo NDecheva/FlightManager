@@ -1,6 +1,8 @@
 ﻿namespace FlightManagerMVC.Enums
 {
-    public class Role
+    public enum Role
     {
+        Admin = 1,
+        Employee
     }
 }
