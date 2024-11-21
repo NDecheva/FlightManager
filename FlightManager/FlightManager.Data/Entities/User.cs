@@ -16,9 +16,9 @@ namespace FlightManager.Data.Entities
         public string Email { get; set; } 
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
-        public int PersonalId { get; set; }
+        public string PersonalId { get; set; }
         public string Address { get; set; }
-        public string Role { get; set; }
+        public int RoleId { get; set; }
         public virtual List<Booking> Bookings { get; set; }
     }
 }
