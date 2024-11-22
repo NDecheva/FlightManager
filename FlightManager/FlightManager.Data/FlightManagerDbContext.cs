@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FlightManager.Data.Entities;
+using FlightManagerMVC.Enums;
 
 namespace FlightManager.Data
 {
@@ -31,28 +32,6 @@ namespace FlightManager.Data
                 .HasForeignKey(b => b.FlightId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
-            modelBuilder.Entity<Booking>()
-                .HasOne(b => b.User)
-                .WithMany(u => u.Bookings)
-                .HasForeignKey(b => b.PersonalId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            
-            modelBuilder.Entity<Flight>()
-                .HasMany(f => f.Bookings)
-                .WithOne(b => b.Flight)
-                .HasForeignKey(b => b.FlightId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Bookings)
-                .WithOne(b => b.User)
-                .HasForeignKey(b => b.PersonalId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            
             modelBuilder.Entity<User>()
                 .HasData(new User
                 {
@@ -63,9 +42,9 @@ namespace FlightManager.Data
                     Email = "admin@example.com",
                     PhoneNumber = "1234567890",
                     Password = "admin123", 
-                    PersonalId = 1,
+                    PersonalId = "1",
                     Address = "123 Admin St.",
-                    Role = "Admin"
+                    RoleId = (int)Role.Admin
                 });
         }
     }
