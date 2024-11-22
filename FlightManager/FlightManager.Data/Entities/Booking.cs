@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightManagerMVC.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace FlightManager.Data.Entities
         public string PhoneNumber { get; set; }
        
         public string Nationality { get; set; }
-        public string SeatClass { get; set; }
+        public SeatClass SeatClass { get; set; }
         
         public int FlightId { get; set; }
         public virtual Flight Flight { get; set; }
