@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlightManager.Shared.Attributes
 {
-    internal class AutoBindAttributes
+    public class AutoBindAttribute : Attribute
     {
     }
 }
