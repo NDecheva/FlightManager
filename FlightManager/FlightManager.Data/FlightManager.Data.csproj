@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FlightManager.Shared\FlightManager.Shared.csproj" />
+    <ProjectReference Include="..\FlightManager.Shared\FlightManager.Shared.csproj" />
   </ItemGroup>
 
 </Project>
