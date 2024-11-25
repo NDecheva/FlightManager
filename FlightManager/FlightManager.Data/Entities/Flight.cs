@@ -22,7 +22,6 @@ namespace FlightManager.Data.Entities
         public DateTime ArrivalTime { get; set; }
         public AircraftType AircraftType { get; set; }
         public int AircraftId { get; set; }
-        public string PersonalId { get; set; }
         public string PilotName { get; set; }
         public int PassengerCapacity { get; set; }
         public int BusinessClassCapacity { get; set; }
