@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightManagerMVC.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace FlightManager.Data.Entities
         public string Password { get; set; }
         public string PersonalId { get; set; }
         public string Address { get; set; }
-        public int RoleId { get; set; }
+        public UserRole Role { get; set; }
         public virtual List<Booking> Bookings { get; set; }
     }
 }

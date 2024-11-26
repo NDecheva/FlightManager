@@ -2,6 +2,8 @@
 using FlightManager.Data.Entities;
 using FlightManagerMVC.Enums;
 
+using PetShelter.Shared.Security;
+
 namespace FlightManager.Data
 {
     public class FlightManagerDbContext : DbContext
@@ -25,12 +27,14 @@ namespace FlightManager.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Flight)
                 .WithMany(f => f.Bookings)
                 .HasForeignKey(b => b.FlightId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            
 
             modelBuilder.Entity<User>()
                 .HasData(new User
@@ -41,10 +45,10 @@ namespace FlightManager.Data
                     LastName = "User",
                     Email = "admin@example.com",
                     PhoneNumber = "1234567890",
-                    Password = "admin123", 
+                    Password = PasswordHasher.HashPassword("string"),
                     PersonalId = "1",
                     Address = "123 Admin St.",
-                    RoleId = (int)Role.Admin
+                    Role =UserRole.Admin
                 });
         }
     }

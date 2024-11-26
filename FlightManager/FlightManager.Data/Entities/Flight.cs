@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightManagerMVC.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,8 @@ namespace FlightManager.Data.Entities
         public string ArrivalLocation { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
-        public string AircraftType { get; set; }
+        public AircraftType AircraftType { get; set; }
         public int AircraftId { get; set; }
-        public string PersonalId { get; set; }
         public string PilotName { get; set; }
         public int PassengerCapacity { get; set; }
         public int BusinessClassCapacity { get; set; }
