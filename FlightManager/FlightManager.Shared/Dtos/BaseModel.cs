@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlightManager.Shared.Dtos
 {
-    internal class Class1
+    public abstract class BaseModel
     {
+        public int Id { get; set; }
     }
 }
