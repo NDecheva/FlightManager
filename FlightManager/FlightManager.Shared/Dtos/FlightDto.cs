@@ -26,6 +26,6 @@ namespace FlightManager.Shared.Dtos
         public int PassengerCapacity { get; set; }
         public int BusinessClassCapacity { get; set; }
 
-        public virtual List<BookingDto> Bookings { get; set; }
+        public List<BookingDto> Bookings { get; set; }
     }
 }

@@ -18,6 +18,6 @@ namespace FlightManager.Shared.Dtos
         public string PersonalId { get; set; }
         public string Address { get; set; }
         public UserRole Role { get; set; }
-        public virtual List<BookingDto> Bookings { get; set; }
+        public List<BookingDto> Bookings { get; set; }
     }
 }
