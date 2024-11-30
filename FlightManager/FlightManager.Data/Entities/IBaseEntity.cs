@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlightManager.Data.Entities
 {
-    public abstract class BaseEntity : IBaseEntity
+    public interface IBaseEntity
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
     }
 }
