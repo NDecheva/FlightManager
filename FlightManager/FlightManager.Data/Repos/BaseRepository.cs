@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FlightManager.Data.Entities;
 using FlightManager.Shared.Dtos;
+using FlightManager.Shared.Repos.Contracts;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
