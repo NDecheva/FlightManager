@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightManager.Data.Entities
+namespace FlightManager.Shared.Contracts
 {
-    public abstract class BaseEntity : IBaseEntity
+    public interface IFlightService : IBaseCrudService
+
     {
-        public int Id { get; set; }
     }
 }
