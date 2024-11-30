@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightManager.Data.Migrations
 {
     [DbContext(typeof(FlightManagerDbContext))]
-    [Migration("20241130111618_Initial")]
+    [Migration("20241130142233_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -176,7 +176,7 @@ namespace FlightManager.Data.Migrations
                             Email = "admin@example.com",
                             FirstName = "Admin",
                             LastName = "User",
-                            Password = "Lc1dNv/LqwubAIuCDJ3z3Snmkj/aFra4Nmj7ImGoxHp0hkr504y3ogBzf/RYUQ5E",
+                            Password = "48sdelNPhejkCktT48QnfWbz9FHvlIuYmWNMb+m21DXxgtISE1RDrpN65NsNlpOy",
                             PersonalId = "1",
                             PhoneNumber = "1234567890",
                             Role = 2,
