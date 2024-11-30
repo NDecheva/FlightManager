@@ -88,7 +88,7 @@ namespace FlightManager.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "Email", "FirstName", "LastName", "Password", "PersonalId", "PhoneNumber", "Role", "UserName" },
-                values: new object[] { 1, "123 Admin St.", "admin@example.com", "Admin", "User", "Lc1dNv/LqwubAIuCDJ3z3Snmkj/aFra4Nmj7ImGoxHp0hkr504y3ogBzf/RYUQ5E", "1", "1234567890", 2, "admin" });
+                values: new object[] { 1, "123 Admin St.", "admin@example.com", "Admin", "User", "Y81LGR1loAcPEQCHLiLh23e+H1uuAlTMg4tOgsn9GXEfkH8nd8nZwVWC82x2JWG8", "1", "1234567890", 2, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_FlightId",

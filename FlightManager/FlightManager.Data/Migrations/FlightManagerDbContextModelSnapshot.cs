@@ -173,7 +173,7 @@ namespace FlightManager.Data.Migrations
                             Email = "admin@example.com",
                             FirstName = "Admin",
                             LastName = "User",
-                            Password = "Lc1dNv/LqwubAIuCDJ3z3Snmkj/aFra4Nmj7ImGoxHp0hkr504y3ogBzf/RYUQ5E",
+                            Password = "Y81LGR1loAcPEQCHLiLh23e+H1uuAlTMg4tOgsn9GXEfkH8nd8nZwVWC82x2JWG8",
                             PersonalId = "1",
                             PhoneNumber = "1234567890",
                             Role = 2,
