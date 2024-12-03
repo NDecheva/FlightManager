@@ -1,9 +1,25 @@
+using FlightManager.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<FlightManagerDbContext>(options =>
+{
+
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+});
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<FlightManagerDbContext>();
+    // Automatically update database
+    context.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
