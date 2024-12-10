@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightManager.Data.Migrations
 {
     [DbContext(typeof(FlightManagerDbContext))]
-    [Migration("20241130142233_Initial")]
+    [Migration("20241206110814_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace FlightManager.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -176,7 +176,7 @@ namespace FlightManager.Data.Migrations
                             Email = "admin@example.com",
                             FirstName = "Admin",
                             LastName = "User",
-                            Password = "48sdelNPhejkCktT48QnfWbz9FHvlIuYmWNMb+m21DXxgtISE1RDrpN65NsNlpOy",
+                            Password = "dPaHSuaBupwg/l/kCtsyd1QyLOKgPfG7L55XbLiStqCIFiRxWud1lwwxYyBrLSP+",
                             PersonalId = "1",
                             PhoneNumber = "1234567890",
                             Role = 2,
