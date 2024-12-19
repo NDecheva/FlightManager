@@ -8,9 +8,11 @@ namespace FlightManagerMVC.ViewModels
         public class ChangePasswordVM : BaseVM
     {
             [Required]
+            [DisplayName("Username")]
             public string Username { get; set; }
-            [Required]
 
+            [Required]
+            [DisplayName("Password")]
             public string Password { get; set; }
 
             [Required]

@@ -27,22 +27,26 @@ namespace FlightManagerMVC.ViewModels
         [Required]
         [DisplayName("Aircraft Type")]
         public AircraftType AircraftType { get; set; }
+        public IEnumerable<SelectListItem> AircraftTypes { get; set; }
 
         [Required]
+        [DisplayName("Aircraft ID")]
         public int AircraftId { get; set; }
 
         [Required]
+        [DisplayName("Pilot Name")]
         public string PilotName { get; set; }
 
         [Required]
+        [DisplayName("Passenger Capacity")]
         public int PassengerCapacity { get; set; }
 
         [Required]
+        [DisplayName("Business Class Capacity")]
         public int BusinessClassCapacity { get; set; }
 
         [Required]
         [DisplayName("Bookings")]
-        public int BookingId { get; set; }
         public IEnumerable<SelectListItem> Bookings { get; set; }
     }
 }
