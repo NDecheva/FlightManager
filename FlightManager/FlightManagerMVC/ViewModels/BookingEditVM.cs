@@ -33,6 +33,7 @@ namespace FlightManagerMVC.ViewModels
         [Required]
         [DisplayName("Seat Class")]
         public SeatClass SeatClass { get; set; }
+        public IEnumerable<SelectListItem> SeatClasses { get; set; }
 
         [Required]
         [DisplayName("Flight")]

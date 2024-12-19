@@ -34,6 +34,7 @@ namespace FlightManagerMVC.ViewModels
         [Required]
         [DisplayName("Role")]
         public UserRole Role { get; set; }
+        public IEnumerable<SelectListItem> Roles { get; set; }
 
         [Required]
         [DisplayName("Bookings")]
