@@ -44,9 +44,5 @@ namespace FlightManagerMVC.ViewModels
         [Required]
         [DisplayName("Business Class Capacity")]
         public int BusinessClassCapacity { get; set; }
-
-        [Required]
-        [DisplayName("Bookings")]
-        public IEnumerable<SelectListItem> Bookings { get; set; }
     }
 }
