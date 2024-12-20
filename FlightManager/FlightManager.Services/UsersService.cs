@@ -15,5 +15,15 @@ namespace FlightManager.Services
         {
 
         }
+
+        public Task<bool> CanUserLoginAsync(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetByUsernameAsync(object username)
+        {
+            throw new NotImplementedException();
+        }
     }   
 }
