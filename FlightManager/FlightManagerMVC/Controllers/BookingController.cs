@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FlightManagerMVC.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin, Employee, User")]
+    [AllowAnonymous]
+    
     public class BookingController : BaseCrudController<BookingDto, IBookingRepository, IBookingsService, BookingEditVM ,BookingDetailsVM>
 
     {

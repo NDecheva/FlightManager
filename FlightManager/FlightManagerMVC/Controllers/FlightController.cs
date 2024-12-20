@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FlightManagerMVC.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin, Employee, User")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin")]
     public class FlightController : BaseCrudController<FlightDto, IFlightRepository, IFlightsService, FlightEditVM, FlightDetailsVM>
 
     {
