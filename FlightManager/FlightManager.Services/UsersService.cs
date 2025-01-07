@@ -1,4 +1,5 @@
-﻿using FlightManager.Shared.Dtos;
+﻿using FlightManager.Shared.Attributes;
+using FlightManager.Shared.Dtos;
 using FlightManager.Shared.Repos.Contracts;
 using FlightManager.Shared.Services.Contracts;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightManager.Services
 {
+    [AutoBind]
     public class UsersService : BaseCrudService<UserDto, IUserRepository>, IUsersService
     {
         public UsersService(IUserRepository repository) : base(repository)
@@ -18,12 +20,12 @@ namespace FlightManager.Services
 
         public Task<bool> CanUserLoginAsync(string username, string password)
         {
-            throw new NotImplementedException();
+            return _repository.CanUserLoginAsync(username, password);
         }
 
-        public Task GetByUsernameAsync(object username)
+        public Task<UserDto> GetByUsernameAsync(string username)
         {
-            throw new NotImplementedException();
+            return _repository.GetByUsernameAsync(username);
         }
     }   
 }

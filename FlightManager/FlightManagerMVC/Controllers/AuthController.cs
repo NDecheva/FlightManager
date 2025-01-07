@@ -59,8 +59,7 @@ namespace FlightManagerMVC.Controllers
             var user = await this.usersService.GetByUsernameAsync(username);
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.Role.Name),
+                new Claim(ClaimTypes.Name, user.UserName),
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -70,38 +69,6 @@ namespace FlightManagerMVC.Controllers
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 principal);
-        }
-
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Register([FromForm] RegisterVM userCreateModel)
-        {
-            string loggedUsername = User.FindFirst(ClaimTypes.Name)?.Value;
-
-            if (loggedUsername != null)
-            {
-                return Forbid();
-            }
-
-            if (await this.usersService.GetByUsernameAsync(userCreateModel.Username) != default)
-            {
-                return BadRequest(Constants.UserAlreadyExists);
-            }
-
-            var hashedPassword = PasswordHasher.HashPassword(userCreateModel.Password);
-            userCreateModel.Password = hashedPassword;
-
-            var userDto = this.mapper.Map<UserDto>(userCreateModel);
-            userDto.RoleId = (await roleService.GetByNameIfExistsAsync(UserRole.User.ToString()))?.Id;
-            await this.usersService.SaveAsync(userDto);
-
-            await LoginUser(userDto.Username);
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [HttpGet]

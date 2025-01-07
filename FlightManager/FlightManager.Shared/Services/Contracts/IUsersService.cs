@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 namespace FlightManager.Shared.Services.Contracts
 {
     public interface IUsersService : IBaseCrudService<UserDto, IUserRepository>
-
     {
         Task<bool> CanUserLoginAsync(string username, string password);
-        Task GetByUsernameAsync(object username);
+        Task<UserDto> GetByUsernameAsync(string username);
     }
 }
