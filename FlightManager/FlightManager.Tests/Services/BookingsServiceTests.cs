@@ -80,5 +80,106 @@ namespace FlightManager.Tests.Services
             _bookingsRepositoryMock.Verify(x => x.DeleteAsync(It.Is<int>(i => i.Equals(id))), Times.Once());
         }
 
+        [Theory]
+        [TestCase(1)]
+        [TestCase(22)]
+        [TestCase(131)]
+        public async Task WhenGetByIdAsync_WithValidBookingId_ThenReturnBooking(int bookingId)
+        {
+            // Arrange
+            var bookingDto = new BookingDto
+            {
+                PersonalId = "09669699",
+                FirstName = "Test",
+                LastName = "Test",
+                MiddleName = "Test",
+                PhoneNumber = "123456789",
+                Nationality = "Test",
+                SeatClass = SeatClass.BusinessClass,
+                FlightId = 1,
+                Flight = new FlightDto
+                {
+                    Id = 1,
+                    DepartureLocation = "test",
+                    ArrivalLocation = "test",
+                    DepartureTime = DateTime.Now,
+                    ArrivalTime = DateTime.Now,
+                    AircraftType = AircraftType.Jet,
+                    AircraftId = 1,
+                    PilotName = "Test",
+                    PassengerCapacity = 1,
+                    BusinessClassCapacity = 1,
+                }
+            };
+
+            _bookingsRepositoryMock.Setup(x => x.GetByIdAsync(It.Is<int>(x => x.Equals(bookingId))))
+                .ReturnsAsync(bookingDto);
+
+            // Act
+            var bookingResult = await _service.GetByIdIfExistsAsync(bookingId);
+
+            // Assert
+            _bookingsRepositoryMock.Verify(x => x.GetByIdAsync(bookingId), Times.Once());
+            Assert.That(bookingResult == bookingDto);
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(102021)]
+        public async Task WhenGetByIdAsync_WithInvalidBookingId_ThenReturnDefault(int bookingId)
+        {
+            // Arrange
+            var booking = (BookingDto)default;
+
+            _bookingsRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(bookingId))))
+                .ReturnsAsync(booking);
+
+            // Act
+            var bookingResult = await _service.GetByIdIfExistsAsync(bookingId);
+
+            // Assert
+            _bookingsRepositoryMock.Verify(x => x.GetByIdAsync(bookingId), Times.Once());
+            Assert.That(bookingResult == booking);
+        }
+
+
+        [Test]
+        public async Task WhenUpdateAsync_WithValidData_ThenSaveAsync()
+        {
+            // Arrange
+            var bookingDto = new BookingDto
+            {
+                PersonalId = "09669699",
+                FirstName = "Test",
+                LastName = "Test",
+                MiddleName = "Test",
+                PhoneNumber = "123456789",
+                Nationality = "Test",
+                SeatClass = SeatClass.BusinessClass,
+                FlightId = 1,
+                Flight = new FlightDto
+                {
+                    Id = 1,
+                    DepartureLocation = "test",
+                    ArrivalLocation = "test",
+                    DepartureTime = DateTime.Now,
+                    ArrivalTime = DateTime.Now,
+                    AircraftType = AircraftType.Jet,
+                    AircraftId = 1,
+                    PilotName = "Test",
+                    PassengerCapacity = 1,
+                    BusinessClassCapacity = 1,
+                }
+            };
+
+            _bookingsRepositoryMock.Setup(s => s.SaveAsync(It.Is<BookingDto>(x => x.Equals(bookingDto))))
+               .Verifiable();
+
+            // Act
+            await _service.SaveAsync(bookingDto);
+
+            // Assert
+            _bookingsRepositoryMock.Verify(x => x.SaveAsync(bookingDto), Times.Once);
+        }
     }
 }
