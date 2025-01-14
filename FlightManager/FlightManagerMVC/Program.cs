@@ -1,10 +1,13 @@
 using FlightManager.Data;
+using FlightManagerMVC;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(m => m.AddProfile(new AutoMapperConfiguration()));
 
 builder.Services.AddDbContext<FlightManagerDbContext>(options =>
 {
