@@ -95,22 +95,4 @@ namespace FlightManager.Tests.Services
 
         protected abstract TModel CreateModel(int id);
     }
-
-    public class UserServiceTests : BaseServiceTests<UserDto, IBaseRepository<UserDto>, UserService>
-    {
-        protected override UserService CreateService(IBaseRepository<UserDto> repository)
-        {
-            return new UserService(repository);
-        }
-
-        protected override UserDto CreateModel(int id)
-        {
-            return new UserDto { Id = id, UserName = $"User{id}" };
-        }
-    }
-
-    public class UserService : BaseCrudService<UserDto, IBaseRepository<UserDto>>
-    {
-        public UserService(IBaseRepository<UserDto> repository) : base(repository) { }
-    }
 }
