@@ -24,8 +24,8 @@ namespace FlightManager.Tests.RepositoryTests
         {
             //arrange
             var bookingId = 1;
-            var booking = new Booking { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", MiddleName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 2 };
-            var bookingDto = new BookingDto { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", MiddleName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 2 };
+            var booking = new Booking { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", MiddleName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 1 };
+            var bookingDto = new BookingDto { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", MiddleName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 1 };
             using (var context = new FlightManagerDbContext(dbContextOptions))
             {
                 context.Bookings.Add(booking);
@@ -54,7 +54,7 @@ namespace FlightManager.Tests.RepositoryTests
 
         }
         [Test]
-        public async Task CreateAsync_ShouldAddEntityToDbSet_WhenModelIsValid()
+        public async Task CreateAsync_ShouldAddEntityToDbSet_WhenModelIsValid_ForBooking()
         {
             // Arrange
             var bookingDto = new BookingDto
@@ -103,6 +103,131 @@ namespace FlightManager.Tests.RepositoryTests
                 Assert.AreEqual(bookingEntity.PhoneNumber, createdBooking.PhoneNumber);
                 Assert.AreEqual(bookingEntity.Nationality, createdBooking.Nationality);
                 Assert.AreEqual(bookingEntity.FlightId, createdBooking.FlightId);
+            }
+        }
+        [Test]
+        public async Task UpdateAsync_ShouldUpdateEntityInDbSet_WhenModelIsValid_ForBooking()
+        {
+            // Arrange
+            var existingBooking = new Booking
+            {
+                Id = 3,
+                PersonalId = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                MiddleName = "Example",
+                PhoneNumber = "Example",
+                Nationality = "Example",
+                FlightId = 3
+            };
+
+            var updatedBookingDto = new BookingDto
+            {
+                Id = 3,
+                PersonalId = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                MiddleName = "Example",
+                PhoneNumber = "Example",
+                Nationality = "Example",
+                FlightId = 3
+            };
+
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                context.Bookings.Add(existingBooking);
+                await context.SaveChangesAsync();
+            }
+
+            mockMapper.Setup(m => m.Map<Booking>(It.IsAny<BookingDto>())).Returns((BookingDto dto) => new Booking
+            {
+                Id = dto.Id,
+                PersonalId = dto.PersonalId,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                MiddleName = dto.MiddleName,
+                PhoneNumber = dto.PhoneNumber,
+                Nationality = dto.Nationality,
+                FlightId=dto.FlightId
+            });
+
+            // Act
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                var bookingRepository = new BookingRepository(context, mockMapper.Object);
+                await bookingRepository.UpdateAsync(updatedBookingDto);
+            }
+
+            // Assert
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                var bookingFromDb = await context.Bookings.FirstOrDefaultAsync(f => f.Id == existingBooking.Id);
+
+                Assert.NotNull(bookingFromDb);
+                Assert.AreEqual(updatedBookingDto.PersonalId, bookingFromDb.PersonalId);
+                Assert.AreEqual(updatedBookingDto.FirstName, bookingFromDb.FirstName);
+                Assert.AreEqual(updatedBookingDto.LastName, bookingFromDb.LastName);
+                Assert.AreEqual(updatedBookingDto.MiddleName, bookingFromDb.MiddleName);
+                Assert.AreEqual(updatedBookingDto.PhoneNumber, bookingFromDb.PhoneNumber);
+                Assert.AreEqual(updatedBookingDto.Nationality, bookingFromDb.Nationality);
+                Assert.AreEqual(updatedBookingDto.FlightId, bookingFromDb.FlightId);
+            }
+        }
+        [Test]
+        public async Task SaveAsync_ShouldSaveUpdatedBookingToDatabase()
+        {
+            // Arrange
+            var booking = new Booking
+            {
+                Id = 4,
+                PersonalId = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                MiddleName = "Example",
+                PhoneNumber = "Example",
+                Nationality = "Example",
+                FlightId = 4
+            };
+
+            var bookingDto = new BookingDto
+            {
+                Id = 4,
+                PersonalId = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                MiddleName = "Example",
+                PhoneNumber = "Example",
+                Nationality = "Example",
+                FlightId = 4
+            };
+
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                context.Bookings.Add(booking);
+                await context.SaveChangesAsync();
+            }
+
+            // Act
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                var bookingRepository = new BookingRepository(context, mockMapper.Object);
+                mockMapper.Setup(m => m.Map<Booking>(bookingDto)).Returns(booking);
+                await bookingRepository.SaveAsync(bookingDto);
+            }
+
+            // Assert
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                var bookingFromDb = await context.Bookings.FirstOrDefaultAsync(f => f.Id == bookingDto.Id);
+
+                Assert.NotNull(bookingFromDb);
+                Assert.AreEqual(bookingDto.PersonalId, bookingFromDb.PersonalId);
+                Assert.AreEqual(bookingDto.FirstName, bookingFromDb.FirstName);
+                Assert.AreEqual(bookingDto.LastName, bookingFromDb.LastName);
+                Assert.AreEqual(bookingDto.MiddleName, bookingFromDb.MiddleName);
+                Assert.AreEqual(bookingDto.PhoneNumber, bookingFromDb.PhoneNumber);
+                Assert.AreEqual(bookingDto.Nationality, bookingFromDb.Nationality);
+                Assert.AreEqual(bookingDto.FlightId, bookingFromDb.FlightId);
             }
         }
 
