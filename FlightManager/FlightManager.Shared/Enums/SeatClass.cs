@@ -1,8 +1,12 @@
-﻿namespace FlightManagerMVC.Enums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FlightManagerMVC.Enums
 {
     public enum SeatClass
     {
-        BusinessClass, 
+        [Display(Name = "Business Class")]
+        BusinessClass,
+        [Display(Name = "Economy Class")]
         EconomyClass
     }
 }

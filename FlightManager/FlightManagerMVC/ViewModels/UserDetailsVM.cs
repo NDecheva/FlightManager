@@ -32,7 +32,7 @@ namespace FlightManagerMVC.ViewModels
         [DisplayName("Role")]
         public UserRole UserRole { get; set; }
 
-        [DisplayName("Booking")]
+        [DisplayName("Bookings")]
         public List<BookingDetailsVM> Bookings { get; set; }
     }
 }
