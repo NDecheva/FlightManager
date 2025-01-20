@@ -13,7 +13,6 @@ namespace FlightManagerMVC
         public AutoMapperConfiguration()
         {
             CreateMap<Booking, BookingDto>().ReverseMap();
-
             CreateMap<BookingDto, BookingEditVM>().ReverseMap();
             CreateMap<BookingDto, BookingDetailsVM>().ReverseMap();
 
@@ -27,7 +26,7 @@ namespace FlightManagerMVC
             CreateMap<UserDto, UserEditVM>().ReverseMap();
             CreateMap<UserDto, UserDetailsVM>().ReverseMap();
 
-
+            CreateMap<LoginVM, LoginDto>().ReverseMap();
         }
     }
 }
