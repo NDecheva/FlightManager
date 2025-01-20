@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FlightManagerMVC.ViewModels.UserDetailsVM>
+﻿@using FlightManager.Shared.Extensions
+@model IEnumerable<FlightManagerMVC.ViewModels.UserDetailsVM>
 @{
     ViewBag.Title = "Users";
 }
@@ -15,6 +16,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -47,6 +51,10 @@
 
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+
+            <td>
+                @item.Role.GetDisplayName()
             </td>
 
             <td>

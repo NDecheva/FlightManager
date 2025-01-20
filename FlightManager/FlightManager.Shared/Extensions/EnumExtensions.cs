@@ -13,11 +13,24 @@ namespace FlightManager.Shared.Extensions
     {
         public static string GetDisplayName(this Enum enumValue)
         {
-            return enumValue.GetType()
+            if (enumValue == null)
+            {
+                return null;
+            }
+
+            string displayName;
+            displayName = enumValue.GetType()
                             .GetMember(enumValue.ToString())
                             .First()
                             .GetCustomAttribute<DisplayAttribute>()
                             .GetName();
+
+            if (string.IsNullOrEmpty(displayName))
+            {
+                displayName = enumValue.ToString();
+            }
+
+            return displayName;
         }
     }
 }

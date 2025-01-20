@@ -1,4 +1,5 @@
-﻿@model FlightManagerMVC.ViewModels.UserDetailsVM
+﻿@using FlightManager.Shared.Extensions
+@model FlightManagerMVC.ViewModels.UserDetailsVM
 
 @{
 
@@ -56,13 +57,13 @@
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.UserRole)
+            @Html.DisplayNameFor(model => model.Role)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.UserRole)
+            @Model.Role.GetDisplayName()
 
         </dd>
 
