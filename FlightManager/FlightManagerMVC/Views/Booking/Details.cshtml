@@ -1,0 +1,70 @@
+@model FlightManagerMVC.ViewModels.BookingDetailsVM
+
+@{ ViewBag.Title = "Details"; }
+
+<h2>Details</h2>
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonalId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PersonalId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.FirstName)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Nationality)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SeatClass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightId)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.FlightId)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "List") 
+</p>

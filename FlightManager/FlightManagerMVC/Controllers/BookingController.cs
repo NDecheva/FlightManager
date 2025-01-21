@@ -12,17 +12,10 @@ namespace FlightManagerMVC.Controllers
     [AllowAnonymous]
     
     public class BookingController : BaseCrudController<BookingDto, IBookingRepository, IBookingsService, BookingEditVM ,BookingDetailsVM>
-
     {
-       
         public BookingController(IBookingsService service,IMapper mapper): base(service,mapper)
         {
 
         }
-       
-        
-                
-        
-
     }
 }
