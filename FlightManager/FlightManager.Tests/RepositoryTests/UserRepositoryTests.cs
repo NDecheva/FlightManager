@@ -4,6 +4,7 @@ using FlightManager.Data.Repos;
 using FlightManager.Shared.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using PetShelter.Shared.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -236,5 +237,126 @@ namespace FlightManager.Tests.RepositoryTests
                 Assert.AreEqual(userDto.Address, userFromDb.Address);
             }
         }
+        [Test]
+        public async Task GetByUsernameAsync_ReturnsCorrectUser()
+        {
+            // Arrange
+            var username = "testuser";
+            var user = new User
+            {
+                Id = 5,
+                UserName = username,
+                Password = "hashedpassword",
+                Email = "test@example.com",
+                FirstName = "John",
+                LastName = "Doe"
+            };
+            var userDto = new UserDto
+            {
+                Id = 5,
+                UserName = username,
+                Email = "test@example.com",
+                FirstName = "John",
+                LastName = "Doe"
+            };
+
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+
+            mockMapper.Setup(m => m.Map<UserDto>(It.IsAny<User>())).Returns(userDto);
+
+            UserDto result;
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                var userRepository = new UserRepository(context, mockMapper.Object);
+                result = await userRepository.GetByUsernameAsync(username);
+            }
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.AreEqual(userDto.Id, result.Id);
+            Assert.AreEqual(userDto.UserName, result.UserName);
+            Assert.AreEqual(userDto.Email, result.Email);
+            Assert.AreEqual(userDto.FirstName, result.FirstName);
+            Assert.AreEqual(userDto.LastName, result.LastName);
+        }
+
+        [Test]
+        public async Task CanUserLoginAsync_ReturnsTrue_WhenPasswordIsCorrect()
+        {
+            // Arrange
+            var username = "testuser";
+            var password = "securepassword";
+            var hashedPassword = PasswordHasher.HashPassword(password);
+
+            var user = new User
+            {
+                Id = 6,
+                UserName = username,
+                Password = hashedPassword,
+                Email = "test@example.com",
+                FirstName = "John",
+                LastName = "Doe"
+            };
+
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+
+            UserRepository userRepository;
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                userRepository = new UserRepository(context, mockMapper.Object);
+            }
+
+            // Act
+            var result = await userRepository.CanUserLoginAsync(username, password);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task CanUserLoginAsync_ReturnsFalse_WhenPasswordIsIncorrect()
+        {
+            // Arrange
+            var username = "testuser";
+            var password = "securepassword";
+            var hashedPassword = PasswordHasher.HashPassword(password);
+
+            var user = new User
+            {
+                Id = 6,
+                UserName = username,
+                Password = hashedPassword,
+                Email = "test@example.com",
+                FirstName = "John",
+                LastName = "Doe"
+            };
+
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+
+            UserRepository userRepository;
+            using (var context = new FlightManagerDbContext(dbContextOptions))
+            {
+                userRepository = new UserRepository(context, mockMapper.Object);
+            }
+
+            // Act
+            var result = await userRepository.CanUserLoginAsync(username, "wrongpassword");
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
     }
 }
