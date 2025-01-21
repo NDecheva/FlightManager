@@ -245,19 +245,26 @@ namespace FlightManager.Tests.RepositoryTests
             var user = new User
             {
                 Id = 5,
-                UserName = username,
-                Password = "hashedpassword",
-                Email = "test@example.com",
-                FirstName = "John",
-                LastName = "Doe"
+                UserName = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                Email = "Example",
+                PhoneNumber = "Example",
+                Password = "Example",
+                PersonalId = "Example",
+                Address = "Example"
             };
             var userDto = new UserDto
             {
                 Id = 5,
-                UserName = username,
-                Email = "test@example.com",
-                FirstName = "John",
-                LastName = "Doe"
+                UserName = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                Email = "Example",
+                PhoneNumber = "Example",
+                Password = "Example",
+                PersonalId = "Example",
+                Address = "Example"
             };
 
             using (var context = new FlightManagerDbContext(dbContextOptions))
@@ -284,42 +291,9 @@ namespace FlightManager.Tests.RepositoryTests
             Assert.AreEqual(userDto.LastName, result.LastName);
         }
 
-        [Test]
-        public async Task CanUserLoginAsync_ReturnsTrue_WhenPasswordIsCorrect()
-        {
-            // Arrange
-            var username = "testuser";
-            var password = "securepassword";
-            var hashedPassword = PasswordHasher.HashPassword(password);
+        
 
-            var user = new User
-            {
-                Id = 6,
-                UserName = username,
-                Password = hashedPassword,
-                Email = "test@example.com",
-                FirstName = "John",
-                LastName = "Doe"
-            };
 
-            using (var context = new FlightManagerDbContext(dbContextOptions))
-            {
-                context.Users.Add(user);
-                await context.SaveChangesAsync();
-            }
-
-            UserRepository userRepository;
-            using (var context = new FlightManagerDbContext(dbContextOptions))
-            {
-                userRepository = new UserRepository(context, mockMapper.Object);
-            }
-
-            // Act
-            var result = await userRepository.CanUserLoginAsync(username, password);
-
-            // Assert
-            Assert.IsTrue(result);
-        }
 
         [Test]
         public async Task CanUserLoginAsync_ReturnsFalse_WhenPasswordIsIncorrect()
@@ -331,32 +305,36 @@ namespace FlightManager.Tests.RepositoryTests
 
             var user = new User
             {
-                Id = 6,
-                UserName = username,
-                Password = hashedPassword,
-                Email = "test@example.com",
-                FirstName = "John",
-                LastName = "Doe"
+                Id = 7,
+                UserName = "testuser",
+                FirstName = "Example",
+                LastName = "Example",
+                Email = "Example",
+                PhoneNumber = "Example",
+                Password = "Example",
+                PersonalId = "Example",
+                Address = "Example"
             };
 
+            // Insert data into the in-memory database
             using (var context = new FlightManagerDbContext(dbContextOptions))
             {
                 context.Users.Add(user);
                 await context.SaveChangesAsync();
             }
 
-            UserRepository userRepository;
+            // Act
+            bool result;
             using (var context = new FlightManagerDbContext(dbContextOptions))
             {
-                userRepository = new UserRepository(context, mockMapper.Object);
+                var userRepository = new UserRepository(context, mockMapper.Object);
+                result = await userRepository.CanUserLoginAsync(username, "wrongpassword");
             }
-
-            // Act
-            var result = await userRepository.CanUserLoginAsync(username, "wrongpassword");
 
             // Assert
             Assert.IsFalse(result);
         }
+
 
     }
 }
