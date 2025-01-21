@@ -1,11 +1,11 @@
 ﻿@using FlightManager.Shared.Extensions
-@model FlightManagerMVC.ViewModels.UserDetailsVM
+@model FlightManagerMVC.ViewModels.FlightDetailsVM
 
 @{
     ViewBag.Title = "Details";
 }
 
-<p class="h3">Users</p>
+<p class="h3">Flight</p>
 <h2>Details</h2>
 
 <div>
@@ -16,101 +16,113 @@
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.DepartureLocation)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.DepartureLocation)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.ArrivalLocation)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.ArrivalLocation)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.DepartureTime)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.DepartureTime)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.Role)
+            @Html.DisplayNameFor(model => model.ArrivalTime)
 
         </dt>
 
         <dd>
 
-            @Model.Role.GetDisplayName()
+            @Html.DisplayFor(model => model.ArrivalTime)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.AircraftType)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.AircraftType)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.AircraftId)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.PhoneNumber)
+            @Html.DisplayFor(model => model.AircraftId)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.PersonalId)
+            @Html.DisplayNameFor(model => model.PilotName)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.PersonalId)
+            @Html.DisplayFor(model => model.PilotName)
 
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.PassengerCapacity)
 
         </dt>
 
         <dd>
 
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.PassengerCapacity)
+
+        </dd>
+
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.BusinessClassCapacity)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.BusinessClassCapacity)
 
         </dd>
     </dl>
-
     <div class="col-md-6">
         <table class="table table-hover">
             @foreach (var item in Model.Bookings)
@@ -157,11 +169,6 @@
             <div>
                 @Html.ActionLink("Back to List", "List")
             </div>
-
         </table>
-
-
     </div>
-
-
 </div>

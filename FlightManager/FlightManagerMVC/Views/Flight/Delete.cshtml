@@ -1,0 +1,150 @@
+﻿@using FlightManager.Shared.Extensions
+@model FlightManagerMVC.ViewModels.FlightDetailsVM
+
+@{
+
+    ViewBag.Title = "Delete";
+
+}
+
+<p class="h4">Flight</p>
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+
+    <hr />
+
+    <dl class="dl-horizontal">
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.DepartureLocation)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.DepartureLocation)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.ArrivalLocation)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.ArrivalLocation)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.DepartureTime)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.DepartureTime)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.ArrivalTime)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.AircraftType)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.AircraftType)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.AircraftId)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.AircraftId)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.PilotName)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.PilotName)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.PassengerCapacity)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.PassengerCapacity)
+
+        </dd>
+
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.BusinessClassCapacity)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.BusinessClassCapacity)
+
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+
+            <input type="submit" value="Delete" class="btn btn-outline-primary mb-3 mt-2" />
+
+        </div>
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back to List", "List")
+        </div>
+
+    }
+
+</div>

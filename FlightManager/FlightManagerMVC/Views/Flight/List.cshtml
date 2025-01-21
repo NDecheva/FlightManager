@@ -1,0 +1,96 @@
+﻿@using FlightManager.Shared.Extensions
+@model IEnumerable<FlightManagerMVC.ViewModels.FlightDetailsVM>
+@{
+    ViewBag.Title = "Flight";
+}
+
+<p class="h2 text-light">Flight</p>
+@Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+<table class="table table-dark table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AircraftType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AircraftId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PilotName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassengerCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessClassCapacity)
+        </th>
+
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureLocation)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalLocation)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+
+            <td>
+                @item.AircraftType.GetDisplayName()
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AircraftId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerCapacity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BusinessClassCapacity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Bookings.Count)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-success btn-sm me-3" })
+
+                @Html.ActionLink("Edit", "Edit", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+                @Html.ActionLink("Delete", "Delete", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+            </td>
+        </tr>
+    }
+</table>
