@@ -59,16 +59,13 @@ namespace FlightManagerMVC.Controllers
             var user = await this.usersService.GetByUsernameAsync(username);
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Name,user.UserName),
+                new Claim(ClaimTypes.Role,user.Role.ToString()),
             };
-
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
             var principal = new ClaimsPrincipal(identity);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                principal);
         }
 
         [HttpGet]
