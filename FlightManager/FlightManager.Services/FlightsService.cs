@@ -1,4 +1,5 @@
-﻿using FlightManager.Shared.Dtos;
+﻿using FlightManager.Shared.Attributes;
+using FlightManager.Shared.Dtos;
 using FlightManager.Shared.Repos.Contracts;
 using FlightManager.Shared.Services.Contracts;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightManager.Services
 {
+    [AutoBind]
     public class FlightsService : BaseCrudService<FlightDto, IFlightRepository>, IFlightsService
     {
         public FlightsService(IFlightRepository repository) : base(repository)
