@@ -1,8 +1,12 @@
-﻿namespace FlightManagerMVC.Enums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FlightManagerMVC.Enums
 {
     public enum UserRole
     {
+        [Display(Name = "User")]
         User = 1,
-        Admin
+        [Display(Name = "Admin")]
+        Admin = 2
     }
 }

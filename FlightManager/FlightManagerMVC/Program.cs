@@ -1,11 +1,15 @@
 using FlightManager.Data;
+using FlightManager.Data.Repos;
+using FlightManager.Services;
 using FlightManagerMVC;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using FlightManager.Shared.Services.Contracts;
 using FlightManager.Shared.Repos.Contracts;  // Ensure this import is added
 using FlightManager.Services;  // Ensure this import is added for BookingsService
 using FlightManager.Data.Repos;
-using FlightManager.Shared.Extensions;  // Ensure this import is added for BookingRepository
+using FlightManager.Shared.Extensions;
+using EntityFrameworkCore.UseRowNumberForPaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +23,17 @@ builder.Services.AutoBind(typeof(BookingRepository).Assembly);
 
 builder.Services.AddDbContext<FlightManagerDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"],
+        r => r.UseRowNumberForPaging());
 });
+
+builder.Services.AutoBind(typeof(BookingsService).Assembly);
+builder.Services.AutoBind(typeof(BookingRepository).Assembly);
+
+builder.Services.AddAutoMapper(m => m.AddProfile(new AutoMapperConfiguration()));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie();
 
 var app = builder.Build();
 
