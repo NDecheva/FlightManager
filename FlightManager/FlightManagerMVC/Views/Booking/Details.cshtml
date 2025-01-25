@@ -1,10 +1,11 @@
+@using FlightManager.Shared.Extensions
 @model FlightManagerMVC.ViewModels.BookingDetailsVM
 
 @{ ViewBag.Title = "Details"; }
 
 <h2>Details</h2>
 <div>
-    <h4>Products</h4>
+    <h4>Booking</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,9 +17,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dt>
+        <dd>
             @Html.DisplayFor(model => model.FirstName)
-        </dt>
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
@@ -28,9 +29,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.MiddleName)
         </dt>
-        <dt>
+        <dd>
             @Html.DisplayFor(model => model.MiddleName)
-        </dt>
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
@@ -40,9 +41,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.Nationality)
         </dt>
-        <dt>
+        <dd>
             @Html.DisplayFor(model => model.Nationality)
-        </dt>
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.SeatClass)
         </dt>
@@ -52,19 +53,64 @@
         <dt>
             @Html.DisplayNameFor(model => model.FlightId)
         </dt>
-        <dt>
+        <dd>
             @Html.DisplayFor(model => model.FlightId)
-        </dt>
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Flight)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Flight)
-        </dd>
-
     </dl>
+
+    <table class="table table-light table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight.DepartureLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight.ArrivalLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight.DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight.ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight.AircraftType)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Flight.DepartureLocation)
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.Flight.ArrivalLocation)
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.Flight.DepartureTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.Flight.ArrivalTime)
+            </td>
+
+            <td>
+                @Model.Flight.AircraftType.GetDisplayName()
+            </td>
+        </tr>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "List") 
-</p>
+
+<div class="my-3">
+    @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+            htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+    @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+            htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
