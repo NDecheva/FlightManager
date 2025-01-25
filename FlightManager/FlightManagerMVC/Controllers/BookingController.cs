@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 
 using FlightManager.Shared.Dtos;
 using FlightManager.Shared.Repos.Contracts;
@@ -24,10 +24,10 @@ namespace FlightManagerMVC.Controllers
 
         protected override async Task<BookingEditVM> PrePopulateVMAsync(BookingEditVM editVM)
         {
-            editVM.SeatClasses = Enum.GetValues(typeof(SeatClass)).Cast<SeatClass>()
+            editVM.SeatClassesList = Enum.GetValues(typeof(SeatClass)).Cast<SeatClass>()
             .Select(seatClass => new SelectListItem($"{seatClass.ToString()}", ((int)seatClass).ToString()));
 
-            editVM.Flight = (await _flightService.GetAllAsync())
+            editVM.FlightsList = (await _flightService.GetAllAsync())
 .Select(x => new SelectListItem($"{x.AircraftId} | {x.DepartureLocation} - {x.ArrivalLocation}", x.Id.ToString()));
 
             return editVM;
