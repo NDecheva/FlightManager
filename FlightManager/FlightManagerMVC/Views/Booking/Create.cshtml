@@ -1,0 +1,108 @@
+@using FlightManagerMVC.Controllers
+@using FlightManager.Shared.Extensions
+@model FlightManagerMVC.ViewModels.BookingEditVM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Booking</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.PersonalId,
+                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingpersonalid", @placeholder = "987654321" } })
+                <label for="floatingpersonalid">Personal Id</label>
+                @Html.ValidationMessageFor(model => model.PersonalId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.FirstName,
+                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingfirstname", @placeholder = "John" } })
+                <label for="floatingfirstname">First Name</label>
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.MiddleName,
+                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingmiddlename", @placeholder = "D." } })
+                <label for="floatingmiddlename">Middle Name</label>
+                @Html.ValidationMessageFor(model => model.MiddleName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.LastName,
+                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatinglastname", @placeholder = "Doe" } })
+                <label for="floatinglastname">Last Name</label>
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.SeatClass, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-4 mb-3">
+
+                @Html.DropDownListFor(model => model.SeatClass, Model.SeatClassesList, "Choose a seat class...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SeatClass)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.FlightId, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-4 mb-3">
+
+                @Html.DropDownListFor(model => model.FlightId, Model.FlightsList, "Choose a flight...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FlightId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.Nationality,
+                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingnationality", @placeholder = "Bulgarian" } })
+                <label for="floatingnationality">Nationality</label>
+                @Html.ValidationMessageFor(model => model.Nationality)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-2 col-md-4">
+                @Html.EditorFor(model => model.PhoneNumber,
+                         new { htmlAttributes = new { @class = "form-control", @type = "tel", @id = "floatingphonenumber", @placeholder = "+359 999 999 999" } })
+                <label for="floatingphonenumber">Phone Number</label>
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+
+            <div class="col-md-offset-2 col-md-10">
+
+                <input type="submit" value="Create" class="btn btn-outline-primary mb-3 mt-2" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

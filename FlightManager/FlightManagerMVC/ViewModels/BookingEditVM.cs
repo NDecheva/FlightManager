@@ -1,4 +1,4 @@
-﻿using FlightManager.Data.Entities;
+using FlightManager.Data.Entities;
 using FlightManagerMVC.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
@@ -33,11 +33,11 @@ namespace FlightManagerMVC.ViewModels
         [Required]
         [DisplayName("Seat Class")]
         public SeatClass SeatClass { get; set; }
-        public IEnumerable<SelectListItem> SeatClasses { get; set; }
+        public IEnumerable<SelectListItem> SeatClassesList { get; set; }
 
         [Required]
         [DisplayName("Flight")]
         public int FlightId { get; set; }
-        public IEnumerable<SelectListItem> Flight { get; set; }
+        public IEnumerable<SelectListItem> FlightsList { get; set; }
     }
 }

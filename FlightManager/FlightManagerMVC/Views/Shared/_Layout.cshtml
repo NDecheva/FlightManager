@@ -1,4 +1,4 @@
-﻿﻿@using System.Security.Claims
+@using System.Security.Claims
 @using FlightManager.Shared
 @using FlightManagerMVC.Enums
 
@@ -29,6 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                      
                         @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.User.ToString() ||
                         Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
                         {

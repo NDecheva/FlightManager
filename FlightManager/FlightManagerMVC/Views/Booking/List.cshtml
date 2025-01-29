@@ -1,0 +1,71 @@
+@model IEnumerable<FlightManagerMVC.ViewModels.BookingDetailsVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p class="h2 text-dark">Booking</p>
+@Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+<table class="table table-dark table-striped">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonalId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeatClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Flight)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatClass)
+            </td>
+            <td>
+                @($"{item.Flight.DepartureLocation} - {item.Flight.ArrivalLocation}")
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-success btn-sm me-3" })
+
+                @Html.ActionLink("Edit", "Edit", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+                @Html.ActionLink("Delete", "Delete", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+            </td>
+        </tr>
+    }
+</table>
