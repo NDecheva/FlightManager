@@ -1,116 +1,71 @@
-@using FlightManager.Shared.Extensions
-@model FlightManagerMVC.ViewModels.BookingDetailsVM
+@model IEnumerable<FlightManagerMVC.ViewModels.BookingDetailsVM>
 
-@{ ViewBag.Title = "Details"; }
+@{
+    ViewBag.Title = "Index";
+}
 
-<h2>Details</h2>
-<div>
-    <h4>Booking</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+<p class="h2 text-dark">Booking</p>
+@Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+<table class="table table-dark table-striped">
+
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.PersonalId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PersonalId)
-        </dd>
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Nationality)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nationality)
-        </dd>
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SeatClass)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SeatClass)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FlightId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FlightId)
-        </dd>
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Flight)
-        </dt>
-    </dl>
-
-    <table class="table table-light table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.DepartureLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.ArrivalLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.DepartureTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.ArrivalTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.AircraftType)
-            </th>
-        </tr>
+        </th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(model => model.Flight.DepartureLocation)
+                @Html.DisplayFor(modelItem => item.PersonalId)
             </td>
-
             <td>
-                @Html.DisplayFor(model => model.Flight.ArrivalLocation)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
-
             <td>
-                @Html.DisplayFor(model => model.Flight.DepartureTime)
+                @Html.DisplayFor(modelItem => item.LastName)
             </td>
-
             <td>
-                @Html.DisplayFor(model => model.Flight.ArrivalTime)
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
-
             <td>
-                @Model.Flight.AircraftType.GetDisplayName()
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatClass)
+            </td>
+            <td>
+                @($"{item.Flight.DepartureLocation} - {item.Flight.ArrivalLocation}")
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-success btn-sm me-3" })
+
+                @Html.ActionLink("Edit", "Edit", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+                @Html.ActionLink("Delete", "Delete", null, new { id = item.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
             </td>
         </tr>
-    </table>
-</div>
-
-<div class="my-3">
-    @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-            htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
-
-    @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-            htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
-</div>
-
-<div>
-    @Html.ActionLink("Back to List", "List")
-</div>
+    }
+</table>
