@@ -1,13 +1,34 @@
 @using FlightManager.Shared.Extensions
 @model FlightManagerMVC.ViewModels.FlightDetailsVM
 
+
+
+@using FlightManager.Shared
+@using FlightManagerMVC
+
+
+@using System.Security.Claims
+@using FlightManagerMVC.Enums
 @{
     ViewBag.Title = "Details";
 }
 
 <p class="h3">Flight</p>
 <h2>Details</h2>
+<audio id="background-music" autoplay loop>
+    <source src="~/audio/1.mp3" type="audio/mpeg">
 
+    Your browser does not support the audio element.
+</audio>
+
+
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById("background-music");
+        audio.play();
+    }
+</script>
 <div>
 
     <hr />
@@ -75,14 +96,36 @@
         </dd>
 
         <dt>
+            @if (
 
-            @Html.DisplayNameFor(model => model.AircraftId)
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayNameFor(model => model.AircraftId)
+            }
+            else
+            {
+
+                @:
+
+            }
+            
 
         </dt>
 
         <dd>
+            @if (
 
-            @Html.DisplayFor(model => model.AircraftId)
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayFor(model => model.AircraftId)
+            }
+            else
+            {
+
+                @:
+
+            }
+            
 
         </dd>
 
@@ -144,11 +187,22 @@
     </div>
 
             <div class="my-3">
-                @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+        @if (
 
-                @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+        Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+        {
+            @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                     htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+            @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                     htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+        }
+        else
+        {
+
+            @:
+
+        }
             </div>
 
             <div>

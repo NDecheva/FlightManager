@@ -1,18 +1,64 @@
 @using FlightManager.Shared.Extensions
 @model FlightManagerMVC.ViewModels.BookingDetailsVM
 
-@{ ViewBag.Title = "Details"; }
+@using FlightManager.Shared
+@using FlightManagerMVC
 
+
+@using System.Security.Claims
+@using FlightManagerMVC.Enums
+
+@{ ViewBag.Title = "Details"; }
+<audio id="background-music" autoplay loop>
+    <source src="~/audio/1.mp3" type="audio/mpeg">
+
+    Your browser does not support the audio element.
+</audio>
+
+
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById("background-music");
+        audio.play();
+    }
+</script>
 <h2>Details</h2>
 <div>
     <h4>Booking</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PersonalId)
+
+            @if (
+
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayNameFor(model => model.PersonalId)
+            }
+            else
+            {
+
+                @:
+
+            }
+            
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PersonalId)
+            @if (
+
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayFor(model => model.PersonalId)
+            }
+            else
+            {
+
+                @:
+
+            }
+            
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -51,10 +97,34 @@
             @Html.DisplayFor(model => model.SeatClass)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.FlightId)
+            @if (
+
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayNameFor(model => model.FlightId)
+            }
+            else
+            {
+
+                @:
+
+            }
+           
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FlightId)
+            @if (
+
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayFor(model => model.FlightId)
+            }
+            else
+            {
+
+                @:
+
+            }
+           
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Flight)
@@ -104,11 +174,25 @@
 </div>
 
 <div class="my-3">
-    @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-            htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+    @if (
 
-    @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-            htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+    Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+    {
+        @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+        @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+    }
+    else
+    {
+       
+        @:
+
+    }
+
+
+    
 </div>
 
 <div>

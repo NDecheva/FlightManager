@@ -1,12 +1,44 @@
+@using FlightManager.Shared
+@using FlightManagerMVC
 @model IEnumerable<FlightManagerMVC.ViewModels.BookingDetailsVM>
+
+@using System.Security.Claims
+@using FlightManagerMVC.Enums
+
 
 @{
     ViewBag.Title = "Index";
 }
+<audio id="background-music" autoplay loop>
+    <source src="~/audio/1.mp3" type="audio/mpeg">
 
+    Your browser does not support the audio element.
+</audio>
+
+
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById("background-music");
+        audio.play();
+    }
+</script>
 <p class="h2 text-dark">Booking</p>
-@Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
-<table class="table table-dark table-striped">
+<p>
+        @if (
+
+        Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+        {
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+        }
+        else
+        {
+
+            @:
+
+        }
+    </p>
+<table class="table table-light table-striped">
 
     <tr>
         <th>
@@ -30,6 +62,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Flight)
         </th>
+        
         <th>Actions</th>
     </tr>
     @foreach (var item in Model)
@@ -57,15 +90,29 @@
                 @($"{item.Flight.DepartureLocation} - {item.Flight.ArrivalLocation}")
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", null, new { id = item.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-success btn-sm me-3" })
+                @if (
 
-                @Html.ActionLink("Edit", "Edit", null, new { id = item.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+               Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                {
+                    @Html.ActionLink("Details", "Details", null, new { id = item.Id },
+                             htmlAttributes: new { @class = "btn btn-outline-success btn-sm me-3" })
 
-                @Html.ActionLink("Delete", "Delete", null, new { id = item.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+                    @Html.ActionLink("Edit", "Edit", null, new { id = item.Id },
+                             htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+                    @Html.ActionLink("Delete", "Delete", null, new { id = item.Id },
+                             htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+                }
+                else
+                {
+                    @Html.ActionLink("Details", "Details", null, new { id = item.Id },
+                    htmlAttributes: new { @class = "btn btn-outline-success btn-sm me-3" })
+                    @:
+                    
+                }
+
             </td>
+            
         </tr>
     }
 </table>

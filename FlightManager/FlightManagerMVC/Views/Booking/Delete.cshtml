@@ -2,7 +2,20 @@
 @model FlightManagerMVC.ViewModels.BookingDetailsVM
 
 @{ ViewBag.Title = "Delete"; }
+<audio id="background-music" autoplay loop>
+    <source src="~/audio/1.mp3" type="audio/mpeg">
 
+    Your browser does not support the audio element.
+</audio>
+
+
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById("background-music");
+        audio.play();
+    }
+</script>
 <h2>Delete</h2>
 <h3>Are you sure you want to delete this?</h3>
 <div>

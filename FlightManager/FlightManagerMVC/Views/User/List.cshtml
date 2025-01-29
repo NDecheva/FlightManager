@@ -3,10 +3,23 @@
 @{
     ViewBag.Title = "Users";
 }
+<audio id="background-music" autoplay loop>
+    <source src="~/audio/1.mp3" type="audio/mpeg">
 
-<p class="h2 text-light">User</p>
+    Your browser does not support the audio element.
+</audio>
+
+
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById("background-music");
+        audio.play();
+    }
+</script>
+<p class="h2 text-dark">User</p>
 @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
-<table class="table table-dark table-striped">
+<table class="table table-light table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
