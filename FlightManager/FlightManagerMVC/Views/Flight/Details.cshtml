@@ -1,0 +1,158 @@
+@using FlightManager.Shared.Extensions
+@model FlightManagerMVC.ViewModels.FlightDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<p class="h3">Flight</p>
+<h2>Details</h2>
+
+<div>
+
+    <hr />
+
+    <dl class="dl-horizontal">
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.DepartureLocation)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.DepartureLocation)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.ArrivalLocation)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.ArrivalLocation)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.DepartureTime)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.DepartureTime)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.ArrivalTime)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.AircraftType)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.AircraftType)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.AircraftId)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.AircraftId)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.PilotName)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.PilotName)
+
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.PassengerCapacity)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.PassengerCapacity)
+
+        </dd>
+
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.BusinessClassCapacity)
+
+        </dt>
+
+        <dd>
+
+            @Html.DisplayFor(model => model.BusinessClassCapacity)
+
+        </dd>
+    </dl>
+    <div class="col-md-5">
+        <dt>Bookings</dt>
+        <table class="table table-hover">
+            @foreach (var item in Model.Bookings)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SeatClass)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+            <div class="my-3">
+                @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+                @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+            </div>
+
+            <div>
+                @Html.ActionLink("Back to List", "List")
+            </div>
+    
+</div>

@@ -113,8 +113,8 @@
 
     <div class="col-md-6">
         <table class="table table-hover">
-             @foreach (var item in Model.Bookings)
-                {
+            @foreach (var item in Model.Bookings)
+            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.PersonalId)
@@ -146,14 +146,22 @@
                 </tr>
             }
 
-    <div class="my-3">
-        @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-                 htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+            <div class="my-3">
+                @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
 
-        @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-                 htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+                @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+            </div>
+
+            <div>
+                @Html.ActionLink("Back to List", "List")
+            </div>
+
+        </table>
+
+
     </div>
 
-    <div>
-        @Html.ActionLink("Back to List", "List")
-    </div>
+
+</div>

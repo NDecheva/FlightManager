@@ -1,0 +1,110 @@
+@model FlightManagerMVC.ViewModels.FlightEditVM
+@{
+    ViewBag.Title = "Create Flight";
+}
+
+<h2>Create Flight</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.DepartureLocation,
+                         new { htmlAttributes = new { @class = "form-control", @placeholder = "DepartureLocation" } })
+                <label for="DepartureLocation">From</label>
+                @Html.ValidationMessageFor(model => model.DepartureLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.ArrivalLocation,
+                         new { htmlAttributes = new { @class = "form-control", @placeholder = "ArrivalLocation" } })
+                <label for="ArrivalLocation">To</label>
+                @Html.ValidationMessageFor(model => model.ArrivalLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.DepartureTime,
+                         new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                <label for="DepartureTime">Departure Time</label>
+                @Html.ValidationMessageFor(model => model.DepartureTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.ArrivalTime,
+                         new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                <label for="ArrivalTime">Arrival Time</label>
+                @Html.ValidationMessageFor(model => model.ArrivalTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.AircraftType, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-3 mb-3">
+
+                @Html.DropDownListFor(model => model.AircraftType, Model.AircraftTypes, "Choose an aircraft type...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AircraftType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.AircraftId,
+                         new { htmlAttributes = new { @class = "form-control" } })
+                <label for="AircraftId">Aircraft ID</label>
+                @Html.ValidationMessageFor(model => model.AircraftId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.PilotName,
+                         new { htmlAttributes = new { @class = "form-control" } })
+                <label for="PilotName">Pilot Name</label>
+                @Html.ValidationMessageFor(model => model.PilotName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.PassengerCapacity,
+                         new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                <label for="PassengerCapacity">Passenger Capacity</label>
+                @Html.ValidationMessageFor(model => model.PassengerCapacity)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-floating mb-3 col-md-4">
+                @Html.EditorFor(model => model.BusinessClassCapacity,
+                         new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                <label for="BusinessClassCapacity">Business Class Capacity</label>
+                @Html.ValidationMessageFor(model => model.BusinessClassCapacity)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
