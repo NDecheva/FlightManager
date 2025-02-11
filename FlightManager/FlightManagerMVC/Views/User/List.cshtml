@@ -6,7 +6,21 @@
 
 <p class="h2 text-dark">User</p>
 @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
-<table class="table table-light table-striped">
+<table class="table table-dark table-striped">
+    <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-body">
+            <form method="get" action="@Url.Action("Search", "User")" class="row g-3">
+                <div class="col-md-10">
+                    <input type="text" class="form-control shadow-sm" name="searchTerm" placeholder="Search for users by email..." value="@ViewBag.SearchTerm" />
+                </div>
+                <div class="col-md-2 text-end">
+                    <button class="btn btn-primary shadow-sm w-100" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)

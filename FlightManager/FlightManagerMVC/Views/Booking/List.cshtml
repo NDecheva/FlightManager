@@ -13,19 +13,17 @@
 <p class="h2 text-dark">Booking</p>
 @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
 <table class="table table-dark table-striped">
-    <div class="card mb-4 border-0 shadow-sm">
-        <div class="card-body">
-            <form method="get" action="@Url.Action("Search", "Booking")" class="row g-3">
-                <div class="col-md-10">
-                    <input type="text" class="form-control shadow-sm" name="searchTerm" placeholder="Search for users..." value="@ViewBag.SearchTerm" />
-                </div>
-                <div class="col-md-2 text-end">
-                    <button class="btn btn-primary shadow-sm w-100" type="submit">
-                        <i class="bi bi-search"></i> Search
-                    </button>
-                </div>
-            </form>
-        </div>
+    <div class="card-body">
+        <form method="get" action="@Url.Action("Search", "Booking")" class="row g-3">
+            <div class="col-md-10">
+                <input type="text" class="form-control shadow-sm" name="searchTerm" placeholder="Search for Bookings ..." value="@ViewBag.SearchTerm" />
+            </div>
+            <div class="col-md-2 text-end">
+                <button class="btn btn-primary shadow-sm w-100" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </div>
+        </form>
     </div>
     <tr>
         <th>

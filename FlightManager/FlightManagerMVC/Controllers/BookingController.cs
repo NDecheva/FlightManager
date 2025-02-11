@@ -47,16 +47,20 @@ namespace FlightManagerMVC.Controllers
                 return RedirectToAction(nameof(List));
             }
 
-            var bookings = await _userService.GetAllAsync();
-
+            var bookings = await _bookingService.GetAllAsync();
             var filteredBookings = bookings.Where(u =>
-                u.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                u.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.MiddleName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.PhoneNumber.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.Nationality.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            var bookingVMs = _mapper.Map<IEnumerable<UserDetailsVM>>(filteredBookings);
 
-            ViewBag.BookingVM = bookingVMs;
+            var bookingsVMs = _mapper.Map<IEnumerable<BookingDetailsVM>>(filteredBookings);
 
-            return View("List", bookingVMs);
+            ViewBag.BookingVMs = bookingsVMs;
+
+            return View("List", bookingsVMs);
         }
     }
 }

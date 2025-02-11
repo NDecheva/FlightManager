@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FlightManager.Services;
 using FlightManager.Shared.Dtos;
 using FlightManager.Shared.Repos.Contracts;
 using FlightManager.Shared.Services.Contracts;
@@ -19,10 +20,11 @@ namespace FlightManagerMVC.Controllers
     public class UserController : BaseCrudController<UserDto, IUserRepository, IUsersService, UserEditVM, UserDetailsVM>
     {
         protected readonly IBookingsService _bookingService;
+        protected readonly IUsersService _userService;
         
-        public UserController(IUsersService service, IMapper mapper): base(service, mapper)
+        public UserController(IUsersService service,IMapper mapper): base(service, mapper)
         {
-                
+                _userService = service;
         }
 
         protected override async Task<UserEditVM> PrePopulateVMAsync(UserEditVM editVM)
@@ -37,6 +39,28 @@ namespace FlightManagerMVC.Controllers
         {
             editVM.Password = PasswordHasher.HashPassword(editVM.Password);
             return base.Create(editVM);
+        }
+        [HttpGet]
+        [Route("User/Search")]
+        public async Task<IActionResult> Search(string searchTerm)
+        {
+            ViewBag.SearchTerm = searchTerm;
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return RedirectToAction(nameof(List));
+            }
+
+            var users = await _userService.GetAllAsync();
+
+            var filteredUsers = users.Where(u =>
+                u.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            var userVMs = _mapper.Map<IEnumerable<UserDetailsVM>>(filteredUsers);
+
+            ViewBag.UserVMs = userVMs;
+
+            return View("List", userVMs);
         }
 
     }
