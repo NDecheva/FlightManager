@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FlightManagerMVC.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin , User")]
     public class FlightController : BaseCrudController<FlightDto, IFlightRepository, IFlightsService, FlightEditVM, FlightDetailsVM>
 
     {

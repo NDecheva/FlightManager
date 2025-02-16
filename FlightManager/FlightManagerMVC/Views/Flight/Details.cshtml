@@ -1,6 +1,14 @@
 @using FlightManager.Shared.Extensions
 @model FlightManagerMVC.ViewModels.FlightDetailsVM
 
+
+
+@using FlightManager.Shared
+@using FlightManagerMVC
+
+
+@using System.Security.Claims
+@using FlightManagerMVC.Enums
 @{
     ViewBag.Title = "Details";
 }
@@ -75,14 +83,36 @@
         </dd>
 
         <dt>
+            @if (
 
-            @Html.DisplayNameFor(model => model.AircraftId)
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayNameFor(model => model.AircraftId)
+            }
+            else
+            {
+
+                @:
+
+            }
+            
 
         </dt>
 
         <dd>
+            @if (
 
-            @Html.DisplayFor(model => model.AircraftId)
+            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+            {
+                @Html.DisplayFor(model => model.AircraftId)
+            }
+            else
+            {
+
+                @:
+
+            }
+            
 
         </dd>
 
@@ -144,11 +174,22 @@
     </div>
 
             <div class="my-3">
-                @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+        @if (
 
-                @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+        Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+        {
+            @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                     htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
+
+            @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                     htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+        }
+        else
+        {
+
+            @:
+
+        }
             </div>
 
             <div>
