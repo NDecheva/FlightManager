@@ -12,9 +12,10 @@
 }
 
 <p class="h2 text-dark">Flight</p>
+
 @if (
 
-   Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+  Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
 {
     @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
 }
@@ -25,7 +26,19 @@ else
 
 }
 
-<table class="table table-light table-striped">
+<table class="table table-dark table-striped">
+    <div class="card-body">
+        <form method="get" action="@Url.Action("Search", "Flight")" class="row g-3">
+            <div class="col-md-10">
+                <input type="text" class="form-control shadow-sm" name="searchTerm" placeholder="Search for Flights ..." value="@ViewBag.SearchTerm" />
+            </div>
+            <div class="col-md-2 text-end">
+                <button class="btn btn-primary shadow-sm w-100" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </div>
+        </form>
+    </div>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.DepartureLocation)
