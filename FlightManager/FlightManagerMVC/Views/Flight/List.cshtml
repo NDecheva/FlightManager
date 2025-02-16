@@ -12,7 +12,20 @@
 }
 
 <p class="h2 text-dark">Flight</p>
-@Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+
+@if (
+
+  Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+{
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+}
+else
+{
+
+    @:
+
+}
+
 <table class="table table-dark table-striped">
     <div class="card-body">
         <form method="get" action="@Url.Action("Search", "Flight")" class="row g-3">

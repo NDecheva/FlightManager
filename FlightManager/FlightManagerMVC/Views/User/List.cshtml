@@ -1,11 +1,26 @@
 ﻿@using FlightManager.Shared.Extensions
+@using System.Security.Claims
+@using FlightManagerMVC.Enums
 @model IEnumerable<FlightManagerMVC.ViewModels.UserDetailsVM>
 @{
     ViewBag.Title = "Users";
 }
 
 <p class="h2 text-dark">User</p>
-@Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+
+@if (
+
+  Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+{
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
+}
+else
+{
+
+    @:
+
+}
+
 <table class="table table-dark table-striped">
     <div class="card mb-4 border-0 shadow-sm">
         <div class="card-body">
