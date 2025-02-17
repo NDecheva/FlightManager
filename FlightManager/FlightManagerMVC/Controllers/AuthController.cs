@@ -80,5 +80,11 @@ namespace FlightManagerMVC.Controllers
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+        [HttpGet]
+        public IActionResult ConfirmLogout()
+        {
+            return View();
+        }
     }
 }

@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FlightManagerMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
 </head>
 <body>
     <header>
@@ -24,44 +27,53 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="bi bi-shield-lock mx-2"></i>Privacy</a>
                         </li>
                       
                         @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.User.ToString() ||
                         Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
                         {
                             <li class=" nav-item">
-                                <a class=" nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="List">Booking</a>
+                                <a class=" nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="List"><i class="bi bi-ticket-perforated-fill mx-2"></i>Booking</a>
                             </li>
                         }
                         @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.User.ToString() ||
                         Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
                         {
                             <li class=" nav-item">
-                                <a class=" nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="List">Flight</a>
+                                <a class=" nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="List"><i class="bi bi-airplane-fill mx-2"></i>Flight</a>
                             </li>
                         }
                         @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
                         {
                             <li class=" nav-item">
-                                <a class=" nav-link text-dark" asp-area="" asp-controller="User" asp-action="List">Users</a>
+                                <a class=" nav-link text-dark" asp-area="" asp-controller="User" asp-action="List"><i class="bi bi-person-badge mx-2"></i>Users</a>
                             </li>
                         }
-                        @if (Context.User?.Identity?.IsAuthenticated == true)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
-                            </li>
-                        }
+                        <!-- 🔹 Десни бутони (тъмна тема + logout) -->
+                        <div class="d-flex align-items-center gap-3 ms-auto">
+                            <!-- Dark Mode Toggle -->
+                            <button id="darkModeToggle" class="btn btn-outline-dark">
+                                <i class="bi bi-moon-fill"></i>
+                            </button>
+
+                            <!-- Login / Logout -->
+                            @if (Context.User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Auth" asp-action="ConfirmLogout" class="btn btn-outline-dark">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-dark">
+                                    <i class="bi bi-box-arrow-in-right"></i> Login
+                                </a>
+                            }
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -78,9 +90,18 @@
             &copy; 2024 - FlightManagerMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script>
+        document.getElementById("darkModeToggle").addEventListener("click", function () {
+            document.body.classList.toggle("dark-mode");
+        });
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
 </body>
 </html>

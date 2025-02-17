@@ -1,14 +1,75 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
 
-<!-- Background Music -->
+    <!-- Добавяне на Bootstrap Lux Theme -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary"><i class="bi bi-airplane-fill"></i> Welcome to Flight Manager</h1>
+            <a href="@Url.Action("Login", "Auth")" class="btn btn-lg btn-primary shadow-sm">
+                <i class="bi bi-arrow-right-circle"></i> Get Started
+            </a>
+        </div>
 
+        <!-- Project Overview Section -->
+        <div class="card border-0 shadow-lg mb-5">
+            <div class="card-body">
+                <h2 class="card-title text-primary fw-bold"><i class="bi bi-info-circle"></i> Project Overview</h2>
+                <p class="card-text">
+                    Flight Manager is an ASP.NET MVC C# application for booking flights and viewing flight details, providing a seamless and user-friendly experience.
+                </p>
+            </div>
+        </div>
 
+        <!-- Core Features Section -->
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary"><i class="bi bi-people-fill"></i> User Management</h3>
+                        <p>User Management allows admins to perform CRUD operations for users. Only admins can efficiently manage employees and assign roles.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary"><i class="bi bi-calendar-check"></i> Leave Requests</h3>
+                        <p>Employees can submit, view, and manage their leave requests, including half-day and sick leave options. Simplify leave approval workflows.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-lg h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary"><i class="bi bi-diagram-3-fill"></i> Team & Project Management</h3>
+                        <p>Teams can be managed, assigned to projects, and filtered by name or project. Organize your workforce effectively with intuitive tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
+        <!-- Additional Resources Section -->
+        <div class="text-center mt-5">
+            <h3 class="text-secondary">Learn more about the project</h3>
+            <p>
+                <a href="https://github.com/NDecheva/FlightManager" target="_blank" class="btn btn-outline-primary shadow-sm">
+                    <i class="bi bi-box-arrow-up-right"></i> Visit GitHub page
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

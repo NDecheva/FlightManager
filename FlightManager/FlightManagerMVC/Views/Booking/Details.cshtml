@@ -10,11 +10,15 @@
 
 @{ ViewBag.Title = "Details"; }
 
-<h2>Details</h2>
 <div>
     <h4>Booking</h4>
     
     <hr />
+
+
+    <div class="card justify-content-center w-50 mx-auto align-items-start mx-3">
+            <h3 class="card-header mb-3 w-100 mw-100">Details</h3>
+            
     <dl class="dl-horizontal">
         <dt>
 
@@ -47,24 +51,26 @@
             }
             
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
+        <div class="d-inline-block">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MiddleName)
+            </dd>
+        </div>
         <dt>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
@@ -113,9 +119,6 @@
             }
            
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Flight)
-        </dt>
     </dl>
 
     <table class="table table-light table-striped">
