@@ -1,113 +1,124 @@
 @model FlightManagerMVC.ViewModels.FlightEditVM
 @{
-    ViewBag.Title = "Create Flight";
+    ViewData["Title"] = "Create New Flight";
+    Layout = "_CreateLayout";
 }
 
-<h2>Flight</h2>
+<h2>Create Flight</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-
-        @Html.ValidationSummary(true)
-
-        <div class="card justify-content-center w-50 mx-auto align-items-center">
-            <h3 class="card-header mb-3">Create</h3>
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.DepartureLocation,
-                             new { htmlAttributes = new { @class = "form-control", @placeholder = "DepartureLocation" } })
-                    <label for="DepartureLocation">From</label>
-                    @Html.ValidationMessageFor(model => model.DepartureLocation)
-                </div>
+<form asp-action="Create" method="post" class="row g-4">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="DepartureLocation" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-geo-alt text-light"></i></span>
+                <input asp-for="DepartureLocation" class="form-control" placeholder="Enter departure location" />
             </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.ArrivalLocation,
-                             new { htmlAttributes = new { @class = "form-control", @placeholder = "ArrivalLocation" } })
-                    <label for="ArrivalLocation">To</label>
-                    @Html.ValidationMessageFor(model => model.ArrivalLocation)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.DepartureTime,
-                             new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
-                    <label for="DepartureTime">Departure Time</label>
-                    @Html.ValidationMessageFor(model => model.DepartureTime)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.ArrivalTime,
-                             new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
-                    <label for="ArrivalTime">Arrival Time</label>
-                    @Html.ValidationMessageFor(model => model.ArrivalTime)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="w-50 mw-50 mx-auto">
-                    @Html.LabelFor(model => model.AircraftType, new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.AircraftType, Model.AircraftTypes, "Choose an aircraft type...", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.AircraftType)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.AircraftId,
-                             new { htmlAttributes = new { @class = "form-control" } })
-                    <label for="AircraftId">Aircraft ID</label>
-                    @Html.ValidationMessageFor(model => model.AircraftId)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.PilotName,
-                             new { htmlAttributes = new { @class = "form-control" } })
-                    <label for="PilotName">Pilot Name</label>
-                    @Html.ValidationMessageFor(model => model.PilotName)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.PassengerCapacity,
-                             new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                    <label for="PassengerCapacity">Passenger Capacity</label>
-                    @Html.ValidationMessageFor(model => model.PassengerCapacity)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100 mb-3">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.BusinessClassCapacity,
-                             new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                    <label for="BusinessClassCapacity">Business Class Capacity</label>
-                    @Html.ValidationMessageFor(model => model.BusinessClassCapacity)
-                </div>
-            </div>
-
-            <div class="form-group">
-
-                <div class="col-md-offset-2 col-md-10">
-
-                    <input type="submit" value="Create" class="btn btn-outline-primary mb-3 mt-2" />
-                </div>
-            </div>
-
-            <div class="mb-3">
-                @Html.ActionLink("Back to List", "List")
-            </div>
+            <span asp-validation-for="DepartureLocation" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="ArrivalLocation" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-geo-alt text-light"></i></span>
+                <input asp-for="ArrivalLocation" class="form-control" placeholder="Enter arrival location" />
+            </div>
+            <span asp-validation-for="ArrivalLocation" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="DepartureTime" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                <input asp-for="DepartureTime" class="form-control" type="datetime-local" />
+            </div>
+            <span asp-validation-for="DepartureTime" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="ArrivalTime" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-clock-fill"></i></span>
+                <input asp-for="ArrivalTime" class="form-control" type="datetime-local" />
+            </div>
+            <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="AircraftType" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-airplane"></i></span>
+                <select asp-for="AircraftType" asp-items="Model.AircraftTypes" class="form-select"></select>
+            </div>
+            <span asp-validation-for="AircraftType" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="PilotName" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input asp-for="PilotName" class="form-control" placeholder="Enter pilot name" />
+            </div>
+            <span asp-validation-for="PilotName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="PassengerCapacity" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input asp-for="PassengerCapacity" class="form-control" placeholder="Enter passenger capacity" />
+            </div>
+            <span asp-validation-for="PassengerCapacity" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="BusinessClassCapacity" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input asp-for="BusinessClassCapacity" class="form-control" placeholder="Enter business class capacity" />
+            </div>
+            <span asp-validation-for="BusinessClassCapacity" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="AircraftId" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-airplane"></i></span>
+                <input asp-for="AircraftId" class="form-control" placeholder="Enter aircraft ID" />
+            </div>
+            <span asp-validation-for="AircraftId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <a asp-action="List" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-dark">
+                <i class="bi bi-plus-circle"></i> Create Flight
+            </button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 

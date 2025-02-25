@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -7,58 +11,86 @@
 
     <!-- Bootswatch Lux Theme CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet">
 
     <!-- Page Title -->
-    <title>Logout - Vacations Manager</title>
+    <title>Logout - Flight Manager</title>
     
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden; /* Избягва скролването */
-        }
-
-        .login-container {
-            height: 100vh;
+        .logout-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-top: -100px
+            justify-content: center;
         }
-
-        .card {
-            width: 100%;
+        
+        .logout-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .plane-icon {
+            font-size: 3rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 0.8rem;
         }
     </style>
 </head>
 <body>
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4 text-center" style="width: 100%; max-width: 400px;">
-        <div class="card-header bg-warning text-dark">
-            <h4 class="mb-0">Logout</h4>
-        </div>
-        <div class="card-body">
+    <div class="logout-container">
+        <div class="logout-card">
+            <i class="bi bi-airplane plane-icon"></i>
+            <h3>Ready to Leave?</h3>
+            
             @if (User.Identity.IsAuthenticated)
             {
-                <p class="mb-4">Are you sure you want to log out?</p>
-                <form asp-action="Logout" asp-controller="Auth" method="get">
-                    <button type="submit" class="btn btn-danger w-100">Logout</button>
-                </form>
+                <p class="text-muted mb-4">Select "Logout" below if you want to end your current session.</p>
+                <div class="btn-group">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </a>
+                    <form asp-action="Logout" asp-controller="Auth" method="get" style="flex: 1;">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </button>
+                    </form>
+                </div>
             }
             else
             {
-                <p class="mb-4">You are not currently logged in.</p>
-                <a href="@Url.Action("Login", "Auth")" class="btn btn-primary w-100">Go to Login</a>
+                <p class="text-muted mb-4">You are not currently logged in.</p>
+                <a href="@Url.Action("Login", "Auth")" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right"></i> Go to Login
+                </a>
             }
-        </div>
-        <div class="card-footer text-muted small">
-            Flight Manager &copy; @DateTime.Now.Year
+            
+            <div class="text-center mt-4">
+                <small class="text-muted">
+                    Flight Manager &copy; @DateTime.Now.Year
+                </small>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap JS (Bundle includes Popper.js) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS (Bundle includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

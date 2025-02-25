@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using FlightManager.Data.Entities;
 using FlightManager.Shared.Dtos;
-
-
 using FlightManagerMVC.ViewModels;
-
 
 namespace FlightManagerMVC
 {
@@ -12,15 +9,23 @@ namespace FlightManagerMVC
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<Booking, BookingDto>().ReverseMap();
-            CreateMap<BookingDto, BookingEditVM>().ReverseMap();
-            CreateMap<BookingDto, BookingDetailsVM>().ReverseMap();
+            CreateMap<Booking, BookingDto>()
+                .ForMember(dest => dest.Flight, opt => opt.MapFrom(src => src.Flight))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId));
+            CreateMap<BookingDto, Booking>();
 
+            CreateMap<BookingDto, BookingEditVM>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId));
+            CreateMap<BookingEditVM, BookingDto>();
+
+            CreateMap<BookingDto, BookingDetailsVM>()
+                .ForMember(dest => dest.Flight, opt => opt.MapFrom(src => src.Flight))
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
+            CreateMap<BookingDetailsVM, BookingDto>();
 
             CreateMap<Flight, FlightDto>().ReverseMap();
             CreateMap<FlightDto, FlightEditVM>().ReverseMap();
             CreateMap<FlightDto, FlightDetailsVM>().ReverseMap();
-
 
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<UserDto, UserEditVM>().ReverseMap();

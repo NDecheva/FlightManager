@@ -1,114 +1,95 @@
 @model FlightManagerMVC.ViewModels.FlightEditVM
+
 @{
     ViewBag.Title = "Edit Flight";
 }
 
-<h2>Flight</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
 
-    <div class="form-horizontal">
-        <hr />
-
-        @Html.ValidationSummary(true)
-
-        @Html.HiddenFor(model => model.Id)
-
-
-        <div class="card justify-content-center w-50 mx-auto align-items-center">
-            <h3 class="card-header mb-3">Edit</h3>
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.DepartureLocation,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @placeholder = "From Location" } })
-                    <label for="DepartureLocation">From</label>
-                    @Html.ValidationMessageFor(model => model.DepartureLocation)
-                </div>
+    <div class="container py-4">
+        <div class="card shadow-lg mx-auto" style="max-width: 800px; border-radius: 15px;">
+            <div class="card-header text-white" 
+                 style="background: linear-gradient(135deg, #333333 0%, #000000 100%); border-radius: 15px 15px 0 0;">
+                <h4 class="mb-0 py-2">Edit Flight Details</h4>
             </div>
 
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.ArrivalLocation,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @placeholder = "To Location" } })
-                    <label for="ToLocation">To</label>
-                    @Html.ValidationMessageFor(model => model.ArrivalLocation)
+            <div class="card-body p-4">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.DepartureLocation, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Departure Location</label>
+                            @Html.ValidationMessageFor(m => m.DepartureLocation, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.ArrivalLocation, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Arrival Location</label>
+                            @Html.ValidationMessageFor(m => m.ArrivalLocation, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.DepartureTime, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                            <label>Departure Time</label>
+                            @Html.ValidationMessageFor(m => m.DepartureTime, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.ArrivalTime, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                            <label>Arrival Time</label>
+                            @Html.ValidationMessageFor(m => m.ArrivalTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.PilotName, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Pilot Name</label>
+                            @Html.ValidationMessageFor(m => m.PilotName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.PassengerCapacity, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                            <label>Passenger Capacity</label>
+                            @Html.ValidationMessageFor(m => m.PassengerCapacity, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.BusinessClassCapacity, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                            <label>Business Class Capacity</label>
+                            @Html.ValidationMessageFor(m => m.BusinessClassCapacity, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.AircraftId, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Aircraft ID</label>
+                            @Html.ValidationMessageFor(m => m.AircraftId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group mb-4">
+                            @Html.LabelFor(m => m.AircraftType, new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(m => m.AircraftType, Model.AircraftTypes, "Select aircraft type...", 
+                                new { @class = "form-select form-select-lg" })
+                            @Html.ValidationMessageFor(m => m.AircraftType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.DepartureTime,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "datetime-local" } })
-                    <label for="DepartureTime">Departure Time</label>
-                    @Html.ValidationMessageFor(model => model.DepartureTime)
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <a href="@Url.Action("List")" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to List
+                    </a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="fas fa-plane me-2"></i>Update Flight
+                    </button>
                 </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.ArrivalTime,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "datetime-local" } })
-                    <label for="ArrivalTime">Arrival Time</label>
-                    @Html.ValidationMessageFor(model => model.ArrivalTime)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="w-50 mw-50 mx-auto">
-                    @Html.LabelFor(model => model.AircraftType, new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.AircraftType, Model.AircraftTypes, "Choose an aircraft type...", new { @class = "form-control mb-3" })
-                    @Html.ValidationMessageFor(model => model.AircraftType)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.AircraftId,
-                             new { htmlAttributes = new { @class = "form-control mb-3" } })
-                    <label for="AAircraftId">Airplane ID</label>
-                    @Html.ValidationMessageFor(model => model.AircraftId)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.PilotName,
-                             new { htmlAttributes = new { @class = "form-control mb-3" } })
-                    <label for="PilotName">Pilot Name</label>
-                    @Html.ValidationMessageFor(model => model.PilotName)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.PassengerCapacity,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "number" } })
-                    <label for="PassengerCapacity">Passenger Capacity</label>
-                    @Html.ValidationMessageFor(model => model.PassengerCapacity)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.BusinessClassCapacity,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "number" } })
-                    <label for="BusinessClassCapacity">Business Capacity</label>
-                    @Html.ValidationMessageFor(model => model.BusinessClassCapacity)
-                </div>
-            </div>
-
-            <div class="form-group">
-
-                <div class="col-md-offset-2 col-md-10">
-
-                    <input type="submit" value="Edit" class="btn btn-outline-primary mb-3 mt-2" />
-                </div>
-            </div>
-
-            <div class="mb-3">
-                @Html.ActionLink("Back to List", "List")
             </div>
         </div>
     </div>

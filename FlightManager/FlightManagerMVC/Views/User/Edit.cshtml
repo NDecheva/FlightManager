@@ -1,119 +1,95 @@
 ﻿@model FlightManagerMVC.ViewModels.UserEditVM
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit User";
 }
 
-<p class="h3">User</p>
-
 @using (Html.BeginForm())
-
 {
-
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-
-        <hr />
-
-        @Html.ValidationSummary(true)
-
-        <div class="card justify-content-center w-50 mx-auto align-items-center">
-            <h3 class="card-header mb-3">Edit</h3>
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                        @Html.EditorFor(model => model.UserName,
-                                 new { htmlAttributes = new { @class = "form-control mb-3", @type = "text", @id = "floatingusername", @placeholder = "jondoe123" } })
-                        <label for="floatingusername">Username</label>
-                        @Html.ValidationMessageFor(model => model.UserName)
-                </div>
+    
+    <div class="container py-4">
+        <div class="card shadow-lg mx-auto" style="max-width: 800px; border-radius: 15px;">
+            <div class="card-header text-white" 
+                 style="background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%); border-radius: 15px 15px 0 0;">
+                <h4 class="mb-0 py-2">Edit User Profile</h4>
             </div>
 
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.Password,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "text", @id = "floatingpassword", @placeholder = "qwerty" } })
-                    <label for="floatingpassword">Password</label>
-                    @Html.ValidationMessageFor(model => model.Password)
+            <div class="card-body p-4">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Username</label>
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Password</label>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>First Name</label>
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Last Name</label>
+                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Email</label>
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Phone Number</label>
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.PersonalId, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Personal ID</label>
+                            @Html.ValidationMessageFor(m => m.PersonalId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+                            <label>Address</label>
+                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group mb-4">
+                            @Html.LabelFor(m => m.Role, new { @class = "form-label fw-bold" })
+                            @Html.DropDownListFor(m => m.Role, Model.Roles, "Select role...", 
+                                new { @class = "form-select form-select-lg" })
+                            @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.FirstName,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "text", @id = "floatingfirstname", @placeholder = "Jon" } })
-                    <label for="floatingfirstname">First Name</label>
-                    @Html.ValidationMessageFor(model => model.FirstName)
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <a href="@Url.Action("List")" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to List
+                    </a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="fas fa-save me-2"></i>Save Changes
+                    </button>
                 </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.LastName,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "text", @id = "floatinglastname", @placeholder = "Doe" } })
-                    <label for="floatinglastname">Last Name</label>
-                    @Html.ValidationMessageFor(model => model.LastName)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="w-50 mw-50 mx-auto">
-                    @Html.LabelFor(model => model.Role, new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.Role, Model.Roles, "Choose a role...", new { @class = "form-control mb-3" })
-                    @Html.ValidationMessageFor(model => model.Role)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.Email,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "email", @id = "floatingemail", @placeholder = "jondoe@mail.com" } })
-                    <label for="floatingemail">Email</label>
-                    @Html.ValidationMessageFor(model => model.Email)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.PhoneNumber,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "tel", @id = "floatingphonenumber", @placeholder = "+359 999 999 999" } })
-                    <label for="floatingphonenumber">Phone Number</label>
-                    @Html.ValidationMessageFor(model => model.PhoneNumber)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.PersonalId,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "text", @id = "floatingpersonalid", @placeholder = "123456789" } })
-                    <label for="floatingpersonalid">Personal Id</label>
-                    @Html.ValidationMessageFor(model => model.PersonalId)
-                </div>
-            </div>
-
-            <div class="form-group w-100 mw-100">
-                <div class="form-floating w-75 mw-75 mx-auto">
-                    @Html.EditorFor(model => model.Address,
-                             new { htmlAttributes = new { @class = "form-control mb-3", @type = "text", @id = "floatingaddress", @placeholder = "21 Jump Str." } })
-                    <label for="floatingaddress">Address</label>
-                    @Html.ValidationMessageFor(model => model.Address)
-                </div>
-            </div>
-
-
-            <div class="form-group">
-
-                <div class="col-md-offset-2 col-md-10">
-
-                    <input type="submit" value="Edit" class="btn btn-outline-primary mb-3 mt-2" />
-                </div>
-            </div>
-
-            <div class="mb-3">
-                @Html.ActionLink("Back to List", "List")
             </div>
         </div>
     </div>
-
 }

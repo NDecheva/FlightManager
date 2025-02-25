@@ -12,17 +12,11 @@
 
 <p class="h2 text-dark">Booking</p>
 
-@if (
-
-  Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+@if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
 {
-    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary mb-3 mt-2" })
-}
-else
-{
-
-    @:
-
+    <a href="@Url.Action("Create", "Booking")" class="btn btn-dark mb-3 mt-2">
+        <i class="bi bi-plus-circle"></i> Create New Booking
+    </a>
 }
 
 <div class="card mb-4 border-0 shadow-sm">
@@ -40,7 +34,7 @@ else
     </div>
 </div>
 
-<table class="table table-light table-striped">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PersonalId)
@@ -102,8 +96,11 @@ else
                     @Html.ActionLink("Edit", "Edit", null, new { id = item.Id },
                              htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
 
-                    @Html.ActionLink("Delete", "Delete", null, new { id = item.Id },
-                             htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+                    <button onclick="showDeleteModal(@item.Id, '@item.PersonalId', '@item.FirstName', '@item.LastName', 
+                        '@item.PhoneNumber', '@item.Nationality', '@item.SeatClass', '@($"{item.Flight.DepartureLocation} - {item.Flight.ArrivalLocation}")')" 
+                        class="btn btn-outline-danger btn-sm me-3">
+                        Delete
+                    </button>
                 }
                 else
                 {
@@ -118,3 +115,62 @@ else
         </tr>
     }
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteBookingModal" tabindex="-1" aria-labelledby="deleteBookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteBookingModalLabel">Confirm Delete Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    Are you sure you want to delete this booking?
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Personal ID:</strong> <span id="modalPersonalId"></span></p>
+                        <p><strong>First Name:</strong> <span id="modalFirstName"></span></p>
+                        <p><strong>Last Name:</strong> <span id="modalLastName"></span></p>
+                        <p><strong>Phone Number:</strong> <span id="modalPhoneNumber"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Nationality:</strong> <span id="modalNationality"></span></p>
+                        <p><strong>Seat Class:</strong> <span id="modalSeatClass"></span></p>
+                        <p><strong>Flight:</strong> <span id="modalFlight"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showDeleteModal(id, personalId, firstName, lastName, phoneNumber, nationality, seatClass, flight) {
+            // Populate modal with booking details
+            document.getElementById('modalPersonalId').textContent = personalId;
+            document.getElementById('modalFirstName').textContent = firstName;
+            document.getElementById('modalLastName').textContent = lastName;
+            document.getElementById('modalPhoneNumber').textContent = phoneNumber;
+            document.getElementById('modalNationality').textContent = nationality;
+            document.getElementById('modalSeatClass').textContent = seatClass;
+            document.getElementById('modalFlight').textContent = flight;
+
+            // Update form action
+            document.getElementById('deleteForm').action = '/Booking/Delete/' + id;
+
+            // Show modal
+            var modal = new bootstrap.Modal(document.getElementById('deleteBookingModal'));
+            modal.show();
+        }
+    </script>
+}

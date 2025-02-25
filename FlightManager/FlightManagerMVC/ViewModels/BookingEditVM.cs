@@ -20,9 +20,6 @@ namespace FlightManagerMVC.ViewModels
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
-        [DisplayName("Middle Name")]
-        public string MiddleName { get; set; }
-
         [Required]
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
@@ -39,5 +36,10 @@ namespace FlightManagerMVC.ViewModels
         [DisplayName("Flight")]
         public int FlightId { get; set; }
         public IEnumerable<SelectListItem> FlightsList { get; set; }
+
+        [Required]
+        [DisplayName("User")]
+        public int UserId { get; set; }
+        public IEnumerable<SelectListItem> UsersList { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using FlightManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightManager.Data.Migrations
 {
     [DbContext(typeof(FlightManagerDbContext))]
-    partial class FlightManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250224000839_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +172,7 @@ namespace FlightManager.Data.Migrations
                             Email = "admin@example.com",
                             FirstName = "Admin",
                             LastName = "User",
-                            Password = "HW5Eo6YcZVS8Izly0MlTQICkkj+W8dnE6oCd4bQgvVQrYwHDjJFCfVspDuz9yze+",
+                            Password = "WSW604a0qVdeLRPdMoXMjpVd0QlxpLQnqDNCuG2hT8qhwovR+AnmeYAAuOtCzOVb",
                             PersonalId = "1",
                             PhoneNumber = "1234567890",
                             Role = 2,

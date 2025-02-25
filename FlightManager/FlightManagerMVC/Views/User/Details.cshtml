@@ -5,163 +5,107 @@
     ViewBag.Title = "Details";
 }
 
-<p class="h3">Users</p>
-<h2>Details</h2>
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 800px;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">User Details</h4>
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.UserName):</strong>
+                        <p>@Html.DisplayFor(model => model.UserName)</p>
+                    </div>
 
-<div>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.FirstName):</strong>
+                        <p>@Html.DisplayFor(model => model.FirstName)</p>
+                    </div>
 
-    <hr />
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.LastName):</strong>
+                        <p>@Html.DisplayFor(model => model.LastName)</p>
+                    </div>
 
-    <dl class="dl-horizontal">
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.Email):</strong>
+                        <p>@Html.DisplayFor(model => model.Email)</p>
+                    </div>
+                </div>
 
-        <dt>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.PhoneNumber):</strong>
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </div>
 
-            @Html.DisplayNameFor(model => model.UserName)
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.PersonalId):</strong>
+                        <p>@Html.DisplayFor(model => model.PersonalId)</p>
+                    </div>
 
-        </dt>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.Address):</strong>
+                        <p>@Html.DisplayFor(model => model.Address)</p>
+                    </div>
 
-        <dd>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.Role):</strong>
+                        <p>@Model.Role.GetDisplayName()</p>
+                    </div>
+                </div>
+            </div>
 
-            @Html.DisplayFor(model => model.UserName)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.FirstName)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.FirstName)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.LastName)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.LastName)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.Role)
-
-        </dt>
-
-        <dd>
-
-            @Model.Role.GetDisplayName()
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.Email)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.Email)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.PhoneNumber)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.PersonalId)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.PersonalId)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.Address)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.Address)
-
-        </dd>
-    </dl>
-
-    <div class="col-md-6">
-        <table class="table table-hover">
-            @foreach (var item in Model.Bookings)
+            @if (Model.Bookings != null && Model.Bookings.Any())
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PersonalId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MiddleName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nationality)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SeatClass)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FlightId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Flight)
-                    </td>
-                </tr>
+                <div class="table-responsive mt-4">
+                    <h5 class="mb-3">Bookings</h5>
+                    <table class="table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Flight</th>
+                                <th>Departure</th>
+                                <th>Arrival</th>
+                                <th>Seat Class</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var booking in Model.Bookings)
+                            {
+                                <tr>
+                                    <td>@booking.Flight.AircraftId</td>
+                                    <td>@booking.Flight.DepartureLocation</td>
+                                    <td>@booking.Flight.ArrivalLocation</td>
+                                    <td>@booking.SeatClass.GetDisplayName()</td>
+                                    <td>
+                                        @if (booking.Flight.DepartureTime > DateTime.Now)
+                                        {
+                                            <span class="badge bg-success">Upcoming</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Past</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
 
-            <div class="my-3">
-                @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
-
-                @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-                         htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
+            <div class="mt-4">
+                <div class="btn-group">
+                    @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                        new { @class = "btn btn-warning me-2" })
+                    @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                        new { @class = "btn btn-danger me-2" })
+                    @Html.ActionLink("Back to List", "List", null, new { @class = "btn btn-secondary" })
+                </div>
             </div>
-
-            <div>
-                @Html.ActionLink("Back to List", "List")
-            </div>
-
-        </table>
-
-
+        </div>
     </div>
-
-
 </div>

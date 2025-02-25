@@ -53,20 +53,9 @@ namespace FlightManager.Data.Repos
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
 
-            try
-            {
-                var entity = this.MapToEntity(model);
-                await _dbSet.AddAsync(entity);
-                await _context.SaveChangesAsync();
-            }
-            catch (SqlException ex)
-            {
-                await Console.Out.WriteLineAsync($"The system threw an sql exception trying to create {nameof(model)}: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                await Console.Out.WriteLineAsync($"The system threw a non-sql exception trying to create {nameof(model)}: {ex.Message}");
-            }
+            var entity = this.MapToEntity(model);
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(TModel model)
@@ -74,23 +63,12 @@ namespace FlightManager.Data.Repos
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
 
-            try
-            {
-                var entity = await this._dbSet.FindAsync(model.Id);
-                if (entity == null)
-                    throw new ArgumentNullException(nameof(entity));
+            var entity = await this._dbSet.FindAsync(model.Id);
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-                _context.Entry(entity).CurrentValues.SetValues(model);
-                await _context.SaveChangesAsync();
-            }
-            catch (SqlException ex)
-            {
-                await Console.Out.WriteLineAsync($"The system threw an sql exception trying to update {nameof(model)}: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                await Console.Out.WriteLineAsync($"The system threw a non-sql exception trying to update {nameof(model)}: {ex.Message}");
-            }
+            _context.Entry(entity).CurrentValues.SetValues(model);
+            await _context.SaveChangesAsync();
         }
 
         public async Task SaveAsync(TModel model)
