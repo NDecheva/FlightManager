@@ -20,3 +20,598 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Light theme (default) */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --navbar-bg: #ffffff;
+    --footer-bg: #ffffff;
+    --table-hover-bg: rgba(0, 0, 0, 0.075);
+    --btn-color: #212529;
+    --link-color: #212529;
+}
+
+/* Dark theme with Sketchy style */
+body.dark-mode {
+    --bg-color: #222;
+    --text-color: #fff;
+    --card-bg: #333;
+    --border-color: #444;
+    --input-bg: #2a2a2a;
+    --input-border: #444;
+    --navbar-bg: #333;
+    --footer-bg: #333;
+    --table-hover-bg: rgba(255, 255, 255, 0.1);
+    --btn-color: #fff;
+    --link-color: #fff;
+    --header-bg: #2a2a2a;
+    --table-bg: #1d1d1d;
+    --table-stripe-bg: #2d2d2d;
+    --btn-bg: #444;
+}
+
+/* Keep Sketchy styles in dark mode */
+body.dark-mode .card {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--border-color);
+}
+
+body.dark-mode .btn {
+    border-width: 2px;
+    border-style: solid;
+}
+
+body.dark-mode .form-control {
+    border-width: 2px;
+    border-style: solid;
+}
+
+/* Rest of the dark mode styles */
+body.dark-mode {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Navbar styles */
+body.dark-mode .navbar {
+    background-color: var(--header-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+body.dark-mode .navbar .nav-link, 
+body.dark-mode .navbar .navbar-brand,
+body.dark-mode .navbar .nav-item a {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .navbar-toggler {
+    background-color: var(--btn-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Card styles */
+body.dark-mode .card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .card-header {
+    background-color: var(--header-bg) !important;
+    border-bottom-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Form controls */
+body.dark-mode .form-control, 
+body.dark-mode .form-select,
+body.dark-mode .form-control-sm,
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="number"],
+body.dark-mode input[type="search"],
+body.dark-mode input[type="tel"],
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+    color: var(--text-color) !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+/* Focus states */
+body.dark-mode .form-control:focus, 
+body.dark-mode .form-select:focus,
+body.dark-mode .form-control-sm:focus,
+body.dark-mode input[type="text"]:focus,
+body.dark-mode input[type="email"]:focus,
+body.dark-mode input[type="password"]:focus,
+body.dark-mode input[type="number"]:focus,
+body.dark-mode input[type="search"]:focus,
+body.dark-mode input[type="tel"]:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
+    box-shadow: none !important;
+    border-color: #80bdff !important;
+    outline: none !important;
+}
+
+/* Remove autofill background color in dark mode */
+body.dark-mode input:-webkit-autofill,
+body.dark-mode input:-webkit-autofill:hover,
+body.dark-mode input:-webkit-autofill:focus,
+body.dark-mode input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--input-bg) inset !important;
+    -webkit-text-fill-color: var(--text-color) !important;
+}
+
+body.dark-mode .form-label {
+    color: var(--text-color) !important;
+}
+
+/* Table styles for dark mode */
+body.dark-mode .table {
+    color: var(--text-color) !important;
+    background-color: var(--table-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Table header */
+body.dark-mode .table thead th {
+    background-color: var(--header-bg) !important;
+    color: var(--text-color) !important;
+    border-bottom: 2px solid var(--border-color) !important;
+}
+
+/* Table rows - ensure ALL rows have the dark background */
+body.dark-mode .table tbody tr,
+body.dark-mode .table tbody tr td,
+body.dark-mode .table-light tbody tr,
+body.dark-mode .table-light tbody tr td {
+    background-color: var(--table-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Table hover effect */
+body.dark-mode .table-hover tbody tr:hover {
+    background-color: var(--table-hover-bg) !important;
+}
+
+/* Override any Bootstrap table styles that might interfere */
+body.dark-mode .table-light,
+body.dark-mode .table-striped,
+body.dark-mode .table-hover {
+    background-color: var(--table-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Ensure all cells maintain dark mode */
+body.dark-mode .table td,
+body.dark-mode .table th,
+body.dark-mode .table-light td,
+body.dark-mode .table-light th {
+    background-color: var(--table-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Footer styles */
+body.dark-mode .footer {
+    background-color: var(--footer-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+body.dark-mode .footer a {
+    color: var(--link-color);
+}
+
+/* Button styles */
+body.dark-mode .btn-outline-dark {
+    color: var(--text-color) !important;
+    border-color: var(--text-color) !important;
+    background-color: transparent !important;
+}
+
+body.dark-mode .btn-outline-dark:hover {
+    color: var(--bg-color) !important;
+    background-color: var(--text-color) !important;
+}
+
+body.dark-mode .btn-primary {
+    background-color: var(--btn-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .btn-warning {
+    background-color: #856404 !important;
+    border-color: #856404 !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .btn-danger {
+    background-color: #721c24 !important;
+    border-color: #721c24 !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: var(--btn-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Links */
+body.dark-mode a {
+    color: var(--link-color);
+}
+
+/* Validation messages */
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Transitions */
+.navbar, .card, .form-control, .table, .footer, .btn, a, body {
+    transition: all 0.3s ease;
+}
+
+/* Dark mode toggle specific */
+#darkModeToggle {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+/* Additional Bootstrap overrides for dark mode */
+body.dark-mode .table-light {
+    background-color: var(--table-bg) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .border-bottom {
+    border-color: var(--border-color) !important;
+}
+
+/* Additional overrides for dark mode */
+body.dark-mode .bg-white {
+    background-color: var(--header-bg) !important;
+}
+
+body.dark-mode .text-dark {
+    color: var(--text-color) !important;
+}
+
+/* Search input styles for dark mode */
+body.dark-mode input[type="search"],
+body.dark-mode .form-control-sm {
+    background-color: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+    color: var(--text-color) !important;
+}
+
+/* Make search placeholder always visible in dark mode */
+body.dark-mode input[type="search"]::placeholder,
+body.dark-mode .form-control-sm::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1 !important;
+}
+
+/* DataTables search input */
+body.dark-mode .dataTables_filter input {
+    color: var(--text-color) !important;
+    background-color: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+}
+
+body.dark-mode .dataTables_filter input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1 !important;
+}
+
+/* Modal styles for dark mode */
+body.dark-mode .modal-content {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .modal-header {
+    background-color: var(--header-bg);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .modal-footer {
+    border-top-color: var(--border-color);
+}
+
+body.dark-mode .modal-title {
+    color: var(--text-color);
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Table styles for dark mode */
+body.dark-mode .table.table-light,
+body.dark-mode .table.table-striped {
+    background-color: var(--table-bg) !important;
+}
+
+/* Override Bootstrap's table-light background */
+body.dark-mode .table-light tbody tr {
+    background-color: var(--table-bg) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .table-light tbody tr:nth-child(even) {
+    background-color: var(--table-stripe-bg) !important;
+}
+
+/* Override any cell backgrounds */
+body.dark-mode .table-light td {
+    background-color: transparent !important;
+}
+
+/* Table header */
+body.dark-mode .table-light thead tr {
+    background-color: var(--header-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Home page styles for dark mode */
+body.dark-mode .h1,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode .card-title,
+body.dark-mode .card-text,
+body.dark-mode .text-primary {
+    color: var(--text-color) !important;
+}
+
+/* Project Overview card in dark mode */
+body.dark-mode .card {
+    background-color: var(--card-bg) !important;
+}
+
+body.dark-mode .card-body {
+    background-color: var(--card-bg) !important;
+}
+
+/* Feature cards in dark mode */
+body.dark-mode .feature-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+body.dark-mode .feature-card h3,
+body.dark-mode .feature-card p {
+    color: var(--text-color) !important;
+}
+
+/* Welcome section in dark mode */
+body.dark-mode .welcome-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .welcome-section h1 {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .description-text {
+    color: var(--text-color) !important;
+}
+
+/* Project section in dark mode */
+body.dark-mode .project-section h2 {
+    color: var(--text-color) !important;
+}
+
+/* Override any Bootstrap text colors */
+body.dark-mode .text-primary,
+body.dark-mode .text-secondary,
+body.dark-mode .fw-bold {
+    color: var(--text-color) !important;
+}
+
+/* Icons in dark mode */
+body.dark-mode .bi {
+    color: #fff !important;
+}
+
+/* Action buttons */
+body.dark-mode .action-button {
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+body.dark-mode .action-button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+/* Project section */
+body.dark-mode .project-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* GitHub link */
+body.dark-mode .github-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--text-color);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+body.dark-mode .github-link:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Dark mode styles */
+[data-bs-theme="dark"] .input-group-text {
+    background-color: #2b3035;
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .input-group-text i {
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .form-control::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+[data-bs-theme="dark"] .form-select {
+    background-color: #2b3035;
+    border-color: #495057;
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .form-select option {
+    background-color: #2b3035;
+    color: #fff;
+}
+
+/* Make placeholders always visible */
+.form-control::placeholder {
+    opacity: 1 !important;
+}
+
+.form-select:invalid {
+    color: #6c757d;
+}
+
+/* Icon styles for light and dark mode */
+.bi {
+    color: var(--text-color) !important;
+}
+
+/* Specific styles for dark mode */
+body.dark-mode .bi {
+    color: #fff !important;
+}
+
+/* Specific styles for light mode */
+body:not(.dark-mode) .bi {
+    color: #212529 !important;
+}
+
+/* Input group styles for dark mode */
+body.dark-mode .input-group {
+    background-color: #2b3035; /* Dark background */
+    border-color: #495057; /* Border color */
+}
+
+/* Input group styles for light mode */
+body:not(.dark-mode) .input-group {
+    background-color: #ffffff; /* Light background */
+    border-color: #ced4da; /* Border color */
+}
+
+/* Input group text color */
+body.dark-mode .input-group-text {
+    background-color: #2b3035; /* Dark background for icons */
+    color: #fff; /* White icons */
+}
+
+body:not(.dark-mode) .input-group-text {
+    background-color: #ffffff; /* Light background for icons */
+    color: #212529; /* Dark icons */
+}
+
+/* Placeholder styles for light mode */
+::placeholder {
+    color: #999 !important; /* Light gray for light mode */
+    opacity: 1 !important; /* Ensure visibility */
+}
+
+/* Placeholder styles for dark mode */
+body.dark-mode ::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important; /* Light gray for dark mode */
+    opacity: 1 !important; /* Ensure visibility */
+}
+
+/* Input styles for dark mode */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    color: var(--text-color) !important; /* Text color */
+}
+
+/* Input styles for light mode */
+body:not(.dark-mode) input,
+body:not(.dark-mode) textarea,
+body:not(.dark-mode) select {
+    color: var(--text-color) !important; /* Text color */
+}
+
+/* Label styles for dark mode */
+body.dark-mode .form-label {
+    color: var(--text-color) !important; /* Ensure labels are visible */
+}
+
+/* Additional styles for other text elements in dark mode */
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode p,
+body.dark-mode strong {
+    color: var(--text-color) !important; /* Ensure headings, paragraphs, and strong text are visible */
+}
+
+/* Text styles for dark mode */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode p {
+    color: var(--text-color) !important; /* Ensure headings and paragraphs are visible */
+}
+
+/* Specific styles for Privacy page */
+body.dark-mode .privacy-policy {
+    color: var(--text-color) !important; /* Ensure privacy policy text is visible */
+}
+
+/* List item styles for dark mode */
+body.dark-mode li {
+    color: var(--text-color) !important; /* Ensure list items are visible */
+}

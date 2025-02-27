@@ -1,14 +1,62 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">✈ Welcome to Flight Manager</h1>
+        <p class="lead">
+            Flight Manager is an ASP.NET MVC C# application for booking flights and viewing flight details, providing a seamless and user-friendly experience.
+        </p>
+        <a href="@Url.Action("Login", "Auth")" class="btn btn-primary btn-lg">
+            Get Started
+        </a>
+    </div>
+
+    <!-- Project Overview Section -->
+    <div class="card border-0 shadow-lg mb-5">
+        <div class="card-body">
+            <h2 class="card-title fw-bold"><i class="bi bi-info-circle"></i> Project Overview</h2>
+            <p class="card-text">
+                Flight Manager is an ASP.NET MVC C# application for booking flights and viewing flight details, providing a seamless and user-friendly experience.
+            </p>
+        </div>
+    </div>
+
+    <!-- Core Features Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg h-100">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-people-fill"></i> User Management</h3>
+                    <p>User Management allows admins to perform CRUD operations for users. Only admins can efficiently manage employees and assign roles.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg h-100">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-calendar-check"></i> Flight Management</h3>
+                    <p>Flight Management enables users to view, create, and manage flight schedules. Users can check flight availability, view details, and make reservations seamlessly.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg h-100">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-diagram-3-fill"></i> Booking Management</h3>
+                    <p>Booking Management allows users to manage their flight bookings efficiently. Users can view their booking history, modify existing bookings, and cancel reservations as needed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Resources Section -->
+    <div class="text-center mt-5">
+        <h2>Learn more about the project</h2>
+        <a href="https://github.com/NDecheva/FlightManager" target="_blank" class="btn btn-outline-primary">
+            <i class="bi bi-github"></i> Visit GitHub page
+        </a>
+    </div>
 </div>
-
-<!-- Background Music -->
-
-
-
-

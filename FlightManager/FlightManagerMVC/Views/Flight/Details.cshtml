@@ -1,199 +1,112 @@
 @using FlightManager.Shared.Extensions
 @model FlightManagerMVC.ViewModels.FlightDetailsVM
-
-
-
 @using FlightManager.Shared
 @using FlightManagerMVC
-
-
 @using System.Security.Claims
 @using FlightManagerMVC.Enums
+
 @{
     ViewBag.Title = "Details";
 }
 
-<p class="h3">Flight</p>
-<h2>Details</h2>
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 800px;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Flight Details</h4>
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.DepartureLocation):</strong>
+                        <p>@Html.DisplayFor(model => model.DepartureLocation)</p>
+                    </div>
 
-<div>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.ArrivalLocation):</strong>
+                        <p>@Html.DisplayFor(model => model.ArrivalLocation)</p>
+                    </div>
 
-    <hr />
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.DepartureTime):</strong>
+                        <p>@Html.DisplayFor(model => model.DepartureTime)</p>
+                    </div>
 
-    <dl class="dl-horizontal">
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.ArrivalTime):</strong>
+                        <p>@Html.DisplayFor(model => model.ArrivalTime)</p>
+                    </div>
 
-        <dt>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.AircraftType):</strong>
+                        <p>@Html.DisplayFor(model => model.AircraftType)</p>
+                    </div>
+                </div>
 
-            @Html.DisplayNameFor(model => model.DepartureLocation)
+                <div class="col-md-6">
+                    @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                    {
+                        <div class="mb-3">
+                            <strong>@Html.DisplayNameFor(model => model.AircraftId):</strong>
+                            <p>@Html.DisplayFor(model => model.AircraftId)</p>
+                        </div>
+                    }
 
-        </dt>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.PilotName):</strong>
+                        <p>@Html.DisplayFor(model => model.PilotName)</p>
+                    </div>
 
-        <dd>
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.PassengerCapacity):</strong>
+                        <p>@Html.DisplayFor(model => model.PassengerCapacity)</p>
+                    </div>
 
-            @Html.DisplayFor(model => model.DepartureLocation)
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.BusinessClassCapacity):</strong>
+                        <p>@Html.DisplayFor(model => model.BusinessClassCapacity)</p>
+                    </div>
+                </div>
+            </div>
 
-        </dd>
+            <div class="mt-4">
+                <h5 class="mb-3">Passenger Bookings</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Seat Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Bookings)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SeatClass)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-        <dt>
-
-            @Html.DisplayNameFor(model => model.ArrivalLocation)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.ArrivalLocation)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.DepartureTime)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.DepartureTime)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.ArrivalTime)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.ArrivalTime)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.AircraftType)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.AircraftType)
-
-        </dd>
-
-        <dt>
-            @if (
-
-            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-            {
-                @Html.DisplayNameFor(model => model.AircraftId)
-            }
-            else
-            {
-
-                @:
-
-            }
-            
-
-        </dt>
-
-        <dd>
-            @if (
-
-            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-            {
-                @Html.DisplayFor(model => model.AircraftId)
-            }
-            else
-            {
-
-                @:
-
-            }
-            
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.PilotName)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.PilotName)
-
-        </dd>
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.PassengerCapacity)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.PassengerCapacity)
-
-        </dd>
-
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.BusinessClassCapacity)
-
-        </dt>
-
-        <dd>
-
-            @Html.DisplayFor(model => model.BusinessClassCapacity)
-
-        </dd>
-    </dl>
-    <div class="col-md-5">
-        <dt>Bookings</dt>
-        <table class="table table-hover">
-            @foreach (var item in Model.Bookings)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SeatClass)
-                    </td>
-                </tr>
-            }
-        </table>
+            <div class="mt-4">
+                @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                {
+                    <div class="btn-group me-2">
+                        @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                            new { @class = "btn btn-warning me-2" })
+                        @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                            new { @class = "btn btn-danger me-2" })
+                    </div>
+                }
+                @Html.ActionLink("Back to List", "List", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
     </div>
-
-            <div class="my-3">
-        @if (
-
-        Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-        {
-            @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-                     htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
-
-            @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-                     htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
-        }
-        else
-        {
-
-            @:
-
-        }
-            </div>
-
-            <div>
-                @Html.ActionLink("Back to List", "List")
-            </div>
-    
 </div>

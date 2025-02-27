@@ -1,0 +1,21 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="container py-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-dark text-white py-3">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-plus-circle-fill me-2 fs-4"></i>
+                <h4 class="mb-0">@ViewData["Title"]</h4>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+} 

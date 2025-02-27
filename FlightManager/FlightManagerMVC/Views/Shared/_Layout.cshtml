@@ -9,60 +9,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FlightManagerMVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FlightManagerMVC.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">✈</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Left side -->
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand me-4" asp-controller="Home" asp-action="Index">✈</a>
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-house-door"></i> Home
+                    </a>
+                    <a class="nav-link text-dark ms-3" asp-controller="Home" asp-action="Privacy">
+                        <i class="bi bi-file-earmark-text"></i> Privacy
+                    </a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                      
+
+                <!-- Center menu -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+                    <ul class="navbar-nav">
                         @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.User.ToString() ||
-                        Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                             Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
                         {
-                            <li class=" nav-item">
-                                <a class=" nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="List">Booking</a>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-dark d-flex align-items-center" asp-controller="Booking" asp-action="List">
+                                    <i class="bi bi-ticket-perforated-fill me-2"></i>Booking
+                                </a>
                             </li>
-                        }
-                        @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.User.ToString() ||
-                        Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-                        {
-                            <li class=" nav-item">
-                                <a class=" nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="List">Flight</a>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-dark d-flex align-items-center" asp-controller="Flight" asp-action="List">
+                                    <i class="bi bi-airplane-fill me-2"></i>Flight
+                                </a>
                             </li>
                         }
                         @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
                         {
-                            <li class=" nav-item">
-                                <a class=" nav-link text-dark" asp-area="" asp-controller="User" asp-action="List">Users</a>
-                            </li>
-                        }
-                        @if (Context.User?.Identity?.IsAuthenticated == true)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-dark d-flex align-items-center" asp-controller="User" asp-action="List">
+                                    <i class="bi bi-person-badge me-2"></i>Users
+                                </a>
                             </li>
                         }
                     </ul>
+                </div>
+
+                <!-- Right side -->
+                <div class="d-flex align-items-center gap-3">
+                    <button id="darkModeToggle" class="btn btn-outline-dark btn-sm" title="Toggle theme">
+                        <i class="bi bi-moon-fill"></i>
+                    </button>
+
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Auth" asp-action="ConfirmLogout" class="btn btn-outline-dark btn-sm">
+                            <i class="bi bi-box-arrow-right me-1"></i>Logout
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-dark btn-sm">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                        </a>
+                    }
                 </div>
             </div>
         </nav>
@@ -78,9 +95,42 @@
             &copy; 2024 - FlightManagerMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                updateDarkModeToggle(true);
+            }
+        });
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            updateDarkModeToggle(isDarkMode);
+        });
+
+        function updateDarkModeToggle(isDarkMode) {
+            const icon = darkModeToggle.querySelector('i');
+            if (isDarkMode) {
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            } else {
+                icon.classList.remove('bi-sun-fill');
+                icon.classList.add('bi-moon-fill');
+            }
+        }
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
 </body>
 </html>

@@ -12,7 +12,6 @@ namespace FlightManager.Shared.Dtos
         public string PersonalId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string MiddleName { get; set; }
         public string PhoneNumber { get; set; }
 
         public string Nationality { get; set; }
@@ -21,5 +20,7 @@ namespace FlightManager.Shared.Dtos
         public int FlightId { get; set; }
         public FlightDto Flight { get; set; }
 
+        public int UserId { get; set; }
+        public UserDto User { get; set; }
     }
 }

@@ -10,178 +10,96 @@
 
 @{ ViewBag.Title = "Details"; }
 
-<h2>Details</h2>
-<div>
-    <h4>Booking</h4>
-    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 800px;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Booking Details</h4>
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                    {
+                        <div class="mb-3">
+                            <strong>@Html.DisplayNameFor(model => model.PersonalId):</strong>
+                            <p>@Html.DisplayFor(model => model.PersonalId)</p>
+                        </div>
+                    }
 
-            @if (
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.FirstName):</strong>
+                        <p>@Html.DisplayFor(model => model.FirstName)</p>
+                    </div>
 
-            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-            {
-                @Html.DisplayNameFor(model => model.PersonalId)
-            }
-            else
-            {
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.LastName):</strong>
+                        <p>@Html.DisplayFor(model => model.LastName)</p>
+                    </div>
+                </div>
 
-                @:
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.PhoneNumber):</strong>
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </div>
 
-            }
-            
-        </dt>
-        <dd>
-            @if (
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.Nationality):</strong>
+                        <p>@Html.DisplayFor(model => model.Nationality)</p>
+                    </div>
 
-            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-            {
-                @Html.DisplayFor(model => model.PersonalId)
-            }
-            else
-            {
+                    <div class="mb-3">
+                        <strong>@Html.DisplayNameFor(model => model.SeatClass):</strong>
+                        <p>@Html.DisplayFor(model => model.SeatClass)</p>
+                    </div>
 
-                @:
+                    @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                    {
+                        <div class="mb-3">
+                            <strong>@Html.DisplayNameFor(model => model.FlightId):</strong>
+                            <p>@Html.DisplayFor(model => model.FlightId)</p>
+                        </div>
+                    }
+                </div>
+            </div>
 
-            }
-            
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Nationality)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nationality)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SeatClass)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SeatClass)
-        </dd>
-        <dt>
-            @if (
+            <div class="table-responsive mt-4">
+                <h5 class="mb-3">Flight Information</h5>
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Flight.DepartureLocation)</th>
+                            <th>@Html.DisplayNameFor(model => model.Flight.ArrivalLocation)</th>
+                            <th>@Html.DisplayNameFor(model => model.Flight.DepartureTime)</th>
+                            <th>@Html.DisplayNameFor(model => model.Flight.ArrivalTime)</th>
+                            <th>@Html.DisplayNameFor(model => model.Flight.AircraftType)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(model => model.Flight.DepartureLocation)</td>
+                            <td>@Html.DisplayFor(model => model.Flight.ArrivalLocation)</td>
+                            <td>@Html.DisplayFor(model => model.Flight.DepartureTime)</td>
+                            <td>@Html.DisplayFor(model => model.Flight.ArrivalTime)</td>
+                            <td>@Model.Flight.AircraftType.GetDisplayName()</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-            {
-                @Html.DisplayNameFor(model => model.FlightId)
-            }
-            else
-            {
-
-                @:
-
-            }
-           
-        </dt>
-        <dd>
-            @if (
-
-            Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-            {
-                @Html.DisplayFor(model => model.FlightId)
-            }
-            else
-            {
-
-                @:
-
-            }
-           
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Flight)
-        </dt>
-    </dl>
-
-    <table class="table table-light table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.DepartureLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.ArrivalLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.DepartureTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.ArrivalTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.AircraftType)
-            </th>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(model => model.Flight.DepartureLocation)
-            </td>
-
-            <td>
-                @Html.DisplayFor(model => model.Flight.ArrivalLocation)
-            </td>
-
-            <td>
-                @Html.DisplayFor(model => model.Flight.DepartureTime)
-            </td>
-
-            <td>
-                @Html.DisplayFor(model => model.Flight.ArrivalTime)
-            </td>
-
-            <td>
-                @Model.Flight.AircraftType.GetDisplayName()
-            </td>
-        </tr>
-    </table>
-</div>
-
-<div class="my-3">
-    @if (
-
-    Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
-    {
-        @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
-                htmlAttributes: new { @class = "btn btn-outline-warning btn-sm me-3" })
-
-        @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
-                htmlAttributes: new { @class = "btn btn-outline-danger btn-sm me-3" })
-    }
-    else
-    {
-       
-        @:
-
-    }
-
-
-    
-</div>
-
-<div>
-    @Html.ActionLink("Back to List", "List")
+            <div class="mt-4">
+                @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+                {
+                    <div class="btn-group">
+                        @Html.ActionLink("Edit", "Edit", null, new { id = Model.Id },
+                            new { @class = "btn btn-warning me-2" })
+                        @Html.ActionLink("Delete", "Delete", null, new { id = Model.Id },
+                            new { @class = "btn btn-danger me-2" })
+                    </div>
+                }
+                @Html.ActionLink("Back to List", "List", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
 </div>

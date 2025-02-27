@@ -1,127 +1,121 @@
 ﻿@model FlightManagerMVC.ViewModels.UserEditVM
 @{
-
-    ViewBag.Title = "Create";
+    ViewData["Title"] = "Create New User";
+    Layout = "_CreateLayout";
 }
 
-
-<h2>Create</h2>
-
-<p class="h3">User</p>
-
-@using (Html.BeginForm())
-
-{
-
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-
-        <hr />
-
-        @Html.ValidationSummary(true)
-
+<form asp-action="Create" method="post" class="row g-4">
+    <div class="col-md-6">
         <div class="form-group">
-
-            <div class="form-group">
-                <div class="form-floating mb-3 col-md-3">
-                    @Html.EditorFor(model => model.UserName,
-                             new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingusername", @placeholder = "jondoe123" } })
-                    <label for="floatingusername">Username</label>
-                    @Html.ValidationMessageFor(model => model.UserName)
-                </div>
+            <label asp-for="UserName" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person text-light"></i></span>
+                <input asp-for="UserName" class="form-control" placeholder="Enter username" />
             </div>
-
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-3 col-md-3">
-                @Html.EditorFor(model => model.Password,
-                         new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "floatingpassword", @placeholder = "qwerty" } })
-                <label for="floatingpassword">Password</label>
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="form-floating mb-3 col-md-3">
-                @Html.EditorFor(model => model.FirstName,
-                         new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "floatingfirstname", @placeholder = "Jon" } })
-                <label for="floatingfirstname">First Name</label>
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-2 col-md-3">
-                @Html.EditorFor(model => model.LastName,
-                         new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "floatinglastname", @placeholder = "Doe" } })
-                <label for="floatinglastname">Last Name</label>
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            @Html.LabelFor(model => model.Role, new { @class = "control-label col-md-2" })
-
-           <div class="col-md-3 mb-3"> 
-
-                @Html.DropDownListFor(model => model.Role, Model.Roles, "Choose a role...", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Role)
-             </div> 
-         </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-2 col-md-3">
-                @Html.EditorFor(model => model.Email,
-                         new { htmlAttributes = new { @class = "form-control", @type = "email", @id = "floatingemail", @placeholder = "jondoe@mail.com" } })
-                <label for="floatingemail">Email</label>
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-2 col-md-3">
-                @Html.EditorFor(model => model.PhoneNumber,
-                         new { htmlAttributes = new { @class = "form-control", @type = "tel", @id = "floatingphonenumber", @placeholder = "+359 999 999 999" } })
-                <label for="floatingphonenumber">Phone Number</label>
-                @Html.ValidationMessageFor(model => model.PhoneNumber)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-2 col-md-3">
-                @Html.EditorFor(model => model.PersonalId,
-                         new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "floatingpersonalid", @placeholder = "123456789" } })
-                <label for="floatingpersonalid">Personal Id</label>
-                @Html.ValidationMessageFor(model => model.PersonalId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-2 col-md-3">
-                @Html.EditorFor(model => model.Address,
-                         new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "floatingaddress", @placeholder = "21 Jump Str." } })
-                <label for="floatingaddress">Address</label>
-                @Html.ValidationMessageFor(model => model.Address)
-            </div>
-        </div>
-
-
-        <div class="form-group">
-
-            <div class="col-md-offset-2 col-md-10">
-
-                <input type="submit" value="Create" class="btn btn-outline-primary mb-3 mt-2" />
-            </div>
+            <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Email" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                <input asp-for="Email" class="form-control" placeholder="Enter email" />
+            </div>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="FirstName" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
+            </div>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="LastName" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+            </div>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Password" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" />
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Role" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-shield"></i></span>
+                <select asp-for="Role" asp-items="Html.GetEnumSelectList<FlightManagerMVC.Enums.UserRole>()" class="form-select"></select>
+            </div>
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="PhoneNumber" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+            </div>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="PersonalId" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
+                <input asp-for="PersonalId" class="form-control" placeholder="Enter personal ID" />
+            </div>
+            <span asp-validation-for="PersonalId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="form-group">
+            <label asp-for="Address" class="form-label"></label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-geo"></i></span>
+                <input asp-for="Address" class="form-control" placeholder="Enter address" />
+            </div>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <a asp-action="List" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-dark">
+                <i class="bi bi-plus-circle"></i> Create User
+            </button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<div>
-
-    @Html.ActionLink("Back to List", "List")
-
-</div>

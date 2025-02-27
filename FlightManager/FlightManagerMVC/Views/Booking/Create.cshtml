@@ -1,108 +1,68 @@
 @using FlightManagerMVC.Controllers
 @using FlightManager.Shared.Extensions
+@using FlightManagerMVC.Enums
 @model FlightManagerMVC.ViewModels.BookingEditVM
 
 @{
-    ViewBag.Title = "Create";
+    ViewData["Title"] = "Create New Booking";
+    Layout = "_CreateLayout";
 }
 
-<h2>Create</h2>
-@using (Html.BeginForm())
+<h2>Create Booking</h2>
 
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <h4>Booking</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
+<form asp-controller="Booking" asp-action="Create" method="post" class="row g-4">
+    <div class="col-md-6">
         <div class="form-group">
-            <div class="form-floating mb-3 col-md-4">
-                @Html.EditorFor(model => model.PersonalId,
-                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingpersonalid", @placeholder = "987654321" } })
-                <label for="floatingpersonalid">Personal Id</label>
-                @Html.ValidationMessageFor(model => model.PersonalId)
+            <label class="form-label">User</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person text-light"></i></span>
+                <select asp-for="UserId" asp-items="@Model.UsersList" class="form-select">
+                    <option value="">Select a user...</option>
+                </select>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-3 col-md-4">
-                @Html.EditorFor(model => model.FirstName,
-                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingfirstname", @placeholder = "John" } })
-                <label for="floatingfirstname">First Name</label>
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-3 col-md-4">
-                @Html.EditorFor(model => model.MiddleName,
-                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingmiddlename", @placeholder = "D." } })
-                <label for="floatingmiddlename">Middle Name</label>
-                @Html.ValidationMessageFor(model => model.MiddleName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-3 col-md-4">
-                @Html.EditorFor(model => model.LastName,
-                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatinglastname", @placeholder = "Doe" } })
-                <label for="floatinglastname">Last Name</label>
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            @Html.LabelFor(model => model.SeatClass, new { @class = "control-label col-md-2" })
-
-            <div class="col-md-4 mb-3">
-
-                @Html.DropDownListFor(model => model.SeatClass, Model.SeatClassesList, "Choose a seat class...", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SeatClass)
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            @Html.LabelFor(model => model.FlightId, new { @class = "control-label col-md-2" })
-
-            <div class="col-md-4 mb-3">
-
-                @Html.DropDownListFor(model => model.FlightId, Model.FlightsList, "Choose a flight...", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FlightId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-3 col-md-4">
-                @Html.EditorFor(model => model.Nationality,
-                         new { htmlAttributes = new { @class = "form-control my-3", @type = "text", @id = "floatingnationality", @placeholder = "Bulgarian" } })
-                <label for="floatingnationality">Nationality</label>
-                @Html.ValidationMessageFor(model => model.Nationality)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-floating mb-2 col-md-4">
-                @Html.EditorFor(model => model.PhoneNumber,
-                         new { htmlAttributes = new { @class = "form-control", @type = "tel", @id = "floatingphonenumber", @placeholder = "+359 999 999 999" } })
-                <label for="floatingphonenumber">Phone Number</label>
-                @Html.ValidationMessageFor(model => model.PhoneNumber)
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-
-            <div class="col-md-offset-2 col-md-10">
-
-                <input type="submit" value="Create" class="btn btn-outline-primary mb-3 mt-2" />
-            </div>
+            <span asp-validation-for="UserId" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-label">Flight</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-airplane text-light"></i></span>
+                <select asp-for="FlightId" asp-items="@Model.FlightsList" class="form-select">
+                    <option value="">Select a flight...</option>
+                </select>
+            </div>
+            <span asp-validation-for="FlightId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-label">Seat Class</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-seat"></i></span>
+                <select asp-for="SeatClass" asp-items="@Model.SeatClassesList" class="form-select">
+                    <option value="">Select seat class...</option>
+                </select>
+            </div>
+            <span asp-validation-for="SeatClass" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between">
+            <a asp-action="List" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-dark">
+                <i class="bi bi-plus-circle"></i> Create Booking
+            </button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<div>
-    @Html.ActionLink("Back to List", "List")
-</div>
+

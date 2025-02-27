@@ -24,8 +24,8 @@ namespace FlightManager.Tests.RepositoryTests
         {
             //arrange
             var bookingId = 1;
-            var booking = new Booking { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", MiddleName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 1 };
-            var bookingDto = new BookingDto { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", MiddleName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 1 };
+            var booking = new Booking { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 1 };
+            var bookingDto = new BookingDto { Id = bookingId, PersonalId = "testuser", FirstName = "Example", LastName = "Example", PhoneNumber = "Example", Nationality = "Example", FlightId = 1 };
             using (var context = new FlightManagerDbContext(dbContextOptions))
             {
                 context.Bookings.Add(booking);
@@ -44,7 +44,6 @@ namespace FlightManager.Tests.RepositoryTests
             Assert.AreEqual(bookingDto.PersonalId, result.PersonalId);
             Assert.AreEqual(bookingDto.FirstName, result.FirstName);
             Assert.AreEqual(bookingDto.LastName, result.LastName);
-            Assert.AreEqual(bookingDto.MiddleName, result.MiddleName);
             Assert.AreEqual(bookingDto.PhoneNumber, result.PhoneNumber);
             Assert.AreEqual(bookingDto.Nationality, result.Nationality);
             Assert.AreEqual(bookingDto.FlightId, result.FlightId);
@@ -63,7 +62,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = "testuser",
                 FirstName = "Example",
                 LastName = "Example",
-                MiddleName = "Example",
                 PhoneNumber = "Example",
                 Nationality = "Example",
                 FlightId = 2
@@ -75,7 +73,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = "testuser",
                 FirstName = "Example",
                 LastName = "Example",
-                MiddleName = "Example",
                 PhoneNumber = "Example",
                 Nationality = "Example",
                 FlightId = 2
@@ -99,7 +96,6 @@ namespace FlightManager.Tests.RepositoryTests
                 Assert.AreEqual(bookingEntity.PersonalId, createdBooking.PersonalId);
                 Assert.AreEqual(bookingEntity.FirstName, createdBooking.FirstName);
                 Assert.AreEqual(bookingEntity.LastName, createdBooking.LastName);
-                Assert.AreEqual(bookingEntity.MiddleName, createdBooking.MiddleName);
                 Assert.AreEqual(bookingEntity.PhoneNumber, createdBooking.PhoneNumber);
                 Assert.AreEqual(bookingEntity.Nationality, createdBooking.Nationality);
                 Assert.AreEqual(bookingEntity.FlightId, createdBooking.FlightId);
@@ -115,7 +111,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = "testuser",
                 FirstName = "Example",
                 LastName = "Example",
-                MiddleName = "Example",
                 PhoneNumber = "Example",
                 Nationality = "Example",
                 FlightId = 3
@@ -127,7 +122,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = "testuser",
                 FirstName = "Example",
                 LastName = "Example",
-                MiddleName = "Example",
                 PhoneNumber = "Example",
                 Nationality = "Example",
                 FlightId = 3
@@ -145,7 +139,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = dto.PersonalId,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                MiddleName = dto.MiddleName,
                 PhoneNumber = dto.PhoneNumber,
                 Nationality = dto.Nationality,
                 FlightId=dto.FlightId
@@ -167,7 +160,6 @@ namespace FlightManager.Tests.RepositoryTests
                 Assert.AreEqual(updatedBookingDto.PersonalId, bookingFromDb.PersonalId);
                 Assert.AreEqual(updatedBookingDto.FirstName, bookingFromDb.FirstName);
                 Assert.AreEqual(updatedBookingDto.LastName, bookingFromDb.LastName);
-                Assert.AreEqual(updatedBookingDto.MiddleName, bookingFromDb.MiddleName);
                 Assert.AreEqual(updatedBookingDto.PhoneNumber, bookingFromDb.PhoneNumber);
                 Assert.AreEqual(updatedBookingDto.Nationality, bookingFromDb.Nationality);
                 Assert.AreEqual(updatedBookingDto.FlightId, bookingFromDb.FlightId);
@@ -183,7 +175,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = "testuser",
                 FirstName = "Example",
                 LastName = "Example",
-                MiddleName = "Example",
                 PhoneNumber = "Example",
                 Nationality = "Example",
                 FlightId = 4
@@ -195,7 +186,6 @@ namespace FlightManager.Tests.RepositoryTests
                 PersonalId = "testuser",
                 FirstName = "Example",
                 LastName = "Example",
-                MiddleName = "Example",
                 PhoneNumber = "Example",
                 Nationality = "Example",
                 FlightId = 4
@@ -224,7 +214,6 @@ namespace FlightManager.Tests.RepositoryTests
                 Assert.AreEqual(bookingDto.PersonalId, bookingFromDb.PersonalId);
                 Assert.AreEqual(bookingDto.FirstName, bookingFromDb.FirstName);
                 Assert.AreEqual(bookingDto.LastName, bookingFromDb.LastName);
-                Assert.AreEqual(bookingDto.MiddleName, bookingFromDb.MiddleName);
                 Assert.AreEqual(bookingDto.PhoneNumber, bookingFromDb.PhoneNumber);
                 Assert.AreEqual(bookingDto.Nationality, bookingFromDb.Nationality);
                 Assert.AreEqual(bookingDto.FlightId, bookingFromDb.FlightId);
